@@ -1,0 +1,38 @@
+#!/usr/bin/make -f
+# See debhelper(7) (uncomment to enable)
+# output every command that modifies files on the build system.
+#export DH_VERBOSE = 1
+
+
+# see FEATURE AREAS in dpkg-buildflags(1)
+#export DEB_BUILD_MAINT_OPTIONS = hardening=+all
+
+# see ENVIRONMENT in dpkg-buildflags(1)
+# package maintainers to append CFLAGS
+#export DEB_CFLAGS_MAINT_APPEND  = -Wall -pedantic
+# package maintainers to append LDFLAGS
+#export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed
+
+
+%:
+	dh $@
+
+override_dh_auto_build:
+	dh_auto_build
+	if command -v cargo >/dev/null 2>&1 && [ -d skydsec-rust ]; then \
+		(cd skydsec-rust && cargo build --release --bin skydsec); \
+		(cd skydsec-rust && RUSTFLAGS="-C target-feature=+crt-static -C relocation-model=static" cargo build --release --bin skydsecd); \
+	fi
+
+
+
+override_dh_auto_install:
+	dh_auto_install
+	if [ -f skydsec-rust/target/release/skydsec ]; then \
+		install -D -m 755 skydsec-rust/target/release/skydsec debian/skydsecd/usr/bin/skydsec-rust; \
+	fi
+	if [ -f skydsec-rust/target/release/skydsecd ]; then \
+		install -D -m 755 skydsec-rust/target/release/skydsecd debian/skydsecd/usr/sbin/skydsecd-rust; \
+	fi
+
+

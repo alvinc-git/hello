@@ -1,0 +1,17 @@
+# /usr/sbin/skydsecd is linked statically on purpose.
+#
+# The daemon reports on the integrity of the host it runs on.  If it resolved
+# its dependencies through shared objects on that host, a compromised host
+# could substitute one and control what the daemon reports about it -- which
+# would defeat the point of running the check at all.
+#
+# This is why the program also avoids getpwuid()/getgrgid(): NSS dlopen()s
+# its modules at runtime even from a statically linked binary, so those calls
+# would have reintroduced exactly the dependency the static link removes.
+# The uid/gid comparison is done against the raw st_uid/st_gid instead.
+#
+# Overridden rather than left to fire so that a genuinely unexpected static
+# binary appearing in this package is not lost in known output.
+skydsecd: statically-linked-binary [usr/sbin/skydsecd]
+skydsecd: statically-linked-binary [usr/sbin/skydsecd-rust]
+

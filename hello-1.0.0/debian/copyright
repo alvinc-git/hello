@@ -1,0 +1,26 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: skydsecd
+Upstream-Contact: Alvin Cura <alvin.cura@skydio.com>
+Source: https://bitbucket.org/alvincura/skydsecd
+
+Files: *
+Copyright: 2023-2026 Skydio, Inc.
+License: Skydio-Proprietary
+
+Files: debian/*
+Copyright: 2023-2026 Skydio, Inc.
+License: Skydio-Proprietary
+
+License: Skydio-Proprietary
+ Skydio Internal Use Only.
+ .
+ This software and its accompanying packaging are the confidential and
+ proprietary property of Skydio, Inc.  They are provided for internal
+ Skydio use only.  Redistribution outside Skydio, in source or binary
+ form, with or without modification, is not permitted without prior
+ written authorisation from Skydio, Inc.
+ .
+ THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+ INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY
+ AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+

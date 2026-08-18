@@ -1,0 +1,16 @@
+Source: skydsecd
+Section: net
+Priority: optional
+Maintainer: Alvin Cura <alvin.cura@skydio.com>
+Build-Depends: debhelper-compat (= 12), cargo
+Standards-Version: 4.4.1
+Homepage: https://bitbucket.org/alvincura/skydsecd
+Vcs-Git: https://bitbucket.org/alvincura/skydsecd.git
+
+Package: skydsecd
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Skydio Security and IT Management Monitor
+ A service to monitor system services for Skydio Security
+ compliance and Skydio IT systems management. Includes both C
+ and Rust client implementations (skydsec and skydsec-rust).
