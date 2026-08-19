@@ -45,6 +45,9 @@ hello-1.0.0/hello
 target/
 hello-1.0.0/hello-rust/target/
 hello-1.0.0/hello-rust/Cargo.lock
+hello_rust
+hello_rust.exe
+hello-1.0.0/hello-rust/hello_rust
 
 # ---------------------------------------------------------------------------
 # Go build output

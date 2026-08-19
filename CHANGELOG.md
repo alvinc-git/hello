@@ -16,6 +16,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **macOS Homebrew Formula**: Added Homebrew formula specification (`hello-1.0.0/homebrew/Formula/hello.rb`), automated checksum verification script (`ci/build-homebrew.sh`), and GitHub Actions workflow job.
 - **ARM64 Debian Support**: Added multi-architecture `arm64` Debian build matrix with QEMU integration, cross-compilation rules in `debian/rules`, and `DEB_HOST_ARCH` support in `ci/build.sh`.
 
+### Changed
+- **Rust Executable**: Renamed Rust executable from `hello-rust` to `hello_rust` and man page from `hello-rust.1` to `hello_rust.1` across build infrastructure, packaging targets, and documentation.
+
 ## [1.0.0] - 2026-08-18
 
 ### Added

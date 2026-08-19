@@ -10,6 +10,7 @@ This document outlines the development workflow, coding standards, and contribut
 
 - **Active Build Root:** [`hello-1.0.0/`](file:///Users/acura/github/hello/hello-1.0.0/)
 - **Rust Program Source:** [`hello-1.0.0/hello-rust/`](file:///Users/acura/github/hello/hello-1.0.0/hello-rust/)
+- **Go Program Source:** [`hello-1.0.0/hello-go/`](file:///Users/acura/github/hello/hello-1.0.0/hello-go/)
 
 > **Note:** The git root is **not** the build root. Always execute build and packaging commands from `hello-1.0.0/` or from the root CI scripts (`./ci/build.sh`, `./ci/build-rpm.sh`).
 
@@ -23,7 +24,11 @@ This document outlines the development workflow, coding standards, and contribut
 - Do not introduce runtime library dependencies beyond standard libc.
 
 ### Rust Program (`hello-1.0.0/hello-rust/`)
-- **Zero External Dependencies:** The Rust implementation must use only the pure Rust standard library (`std`). Third-party crates in `Cargo.toml` (`[dependencies]`) are strictly not permitted.
+- **Zero External Dependencies:** The Rust implementation (`hello_rust`) must use only the pure Rust standard library (`std`). Third-party crates in `Cargo.toml` (`[dependencies]`) are strictly not permitted.
+- Maintain argument and functional parity with the C implementation (`-h`/`--help`, `-v`/`--version`, and standard greeting).
+
+### Go Program (`hello-1.0.0/hello-go/`)
+- **Zero External Dependencies:** The Go implementation (`hello_go`) must use only the pure Go standard library. Third-party packages in `go.mod` are strictly not permitted.
 - Maintain argument and functional parity with the C implementation (`-h`/`--help`, `-v`/`--version`, and standard greeting).
 
 ---
@@ -42,6 +47,12 @@ make
 ### Standalone Rust Verification
 ```bash
 cd hello-1.0.0/hello-rust
+./test-build.sh
+```
+
+### Standalone Go Verification
+```bash
+cd hello-1.0.0/hello-go
 ./test-build.sh
 ```
 

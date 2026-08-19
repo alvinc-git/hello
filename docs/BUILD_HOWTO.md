@@ -47,13 +47,13 @@ make
 ./hello --version
 
 # Rust binary (if cargo was present)
-./hello-rust/target/release/hello
+./hello-rust/target/release/hello_rust
 
 # Go binary (if go was present)
 ./hello-go/hello_go
 ```
 
-If `cargo` is detected during `./configure`, `hello-rust` is compiled automatically as part of `make`.
+If `cargo` is detected during `./configure`, `hello_rust` is compiled automatically as part of `make`.
 If `go` is detected during `./configure`, `hello_go` is compiled automatically as part of `make`.
 
 ---
@@ -67,7 +67,7 @@ To build only the zero-dependency Rust implementation:
 ```bash
 cd hello-1.0.0/hello-rust
 cargo build --release
-./target/release/hello
+./target/release/hello_rust
 ```
 
 Or run the automated test script:
@@ -147,7 +147,7 @@ To test locally with `flatpak`:
 ```bash
 flatpak install --user hello-1.0.0/flatpak/dist/io.github.alvinc_git.hello-1.0.0.flatpak
 flatpak run io.github.alvinc_git.hello
-flatpak run --command=hello-rust io.github.alvinc_git.hello
+flatpak run --command=hello_rust io.github.alvinc_git.hello
 ```
 
 ## 7. AppImage Packaging (`.AppImage`)

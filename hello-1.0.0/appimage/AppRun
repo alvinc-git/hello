@@ -15,8 +15,10 @@ export MANPATH="${HERE}/usr/share/man:${MANPATH:-}"
 
 # Check invocation name
 INVOCATION_NAME="$(basename "$0")"
-if [ "$INVOCATION_NAME" = "hello-rust" ]; then
-    exec "${HERE}/usr/bin/hello-rust" "$@"
+if [ "$INVOCATION_NAME" = "hello_rust" ] || [ "$INVOCATION_NAME" = "hello-rust" ]; then
+    exec "${HERE}/usr/bin/hello_rust" "$@"
+elif [ "$INVOCATION_NAME" = "hello_go" ]; then
+    exec "${HERE}/usr/bin/hello_go" "$@"
 fi
 
 # Default to C implementation

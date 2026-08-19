@@ -12,8 +12,8 @@ base: core24
 apps:
   hello:
     command: usr/bin/hello
-  hello-rust:
-    command: usr/bin/hello-rust
+  hello_rust:
+    command: usr/bin/hello_rust
   hello_go:
     command: usr/bin/hello_go
 

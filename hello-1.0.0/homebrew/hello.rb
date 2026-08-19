@@ -18,7 +18,7 @@ class Hello < Formula
 
   test do
     assert_match "Hello, World!", shell_output("#{bin}/hello")
-    assert_match "Hello, World!", shell_output("#{bin}/hello-rust")
+    assert_match "Hello, World!", shell_output("#{bin}/hello_rust")
     assert_match "Hello, World!", shell_output("#{bin}/hello_go")
   end
 end

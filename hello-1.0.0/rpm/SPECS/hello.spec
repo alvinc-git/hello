@@ -51,11 +51,11 @@ cat << 'EOF' > file.list
 %{_mandir}/man1/hello.1*
 EOF
 
-if [ -f hello-rust/target/release/hello ]; then
-    install -D -m 755 hello-rust/target/release/hello %{buildroot}/%{_bindir}/hello-rust
-    install -D -m 644 man/hello-rust.1 %{buildroot}/%{_mandir}/man1/hello-rust.1
-    echo "%{_bindir}/hello-rust" >> file.list
-    echo "%{_mandir}/man1/hello-rust.1*" >> file.list
+if [ -f hello-rust/target/release/hello_rust ]; then
+    install -D -m 755 hello-rust/target/release/hello_rust %{buildroot}/%{_bindir}/hello_rust
+    install -D -m 644 man/hello_rust.1 %{buildroot}/%{_mandir}/man1/hello_rust.1
+    echo "%{_bindir}/hello_rust" >> file.list
+    echo "%{_mandir}/man1/hello_rust.1*" >> file.list
 fi
 
 if [ -f hello-go/hello_go ]; then

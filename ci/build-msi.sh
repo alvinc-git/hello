@@ -51,11 +51,11 @@ elif command -v wixl >/dev/null 2>&1; then
 
     if command -v cargo >/dev/null 2>&1 && rustup target list 2>/dev/null | grep -q 'x86_64-pc-windows-gnu (installed)'; then
         (cd "$SRC/hello-rust" && cargo build --release --target x86_64-pc-windows-gnu)
-        cp "$SRC/hello-rust/target/x86_64-pc-windows-gnu/release/hello.exe" "$MSI_ROOT/hello-rust.exe"
-    elif [ -f "$SRC/hello-rust/target/release/hello" ]; then
-        cp "$SRC/hello-rust/target/release/hello" "$MSI_ROOT/hello-rust.exe" 2>/dev/null || cp "$MSI_ROOT/hello.exe" "$MSI_ROOT/hello-rust.exe"
+        cp "$SRC/hello-rust/target/x86_64-pc-windows-gnu/release/hello_rust.exe" "$MSI_ROOT/hello_rust.exe"
+    elif [ -f "$SRC/hello-rust/target/release/hello_rust" ]; then
+        cp "$SRC/hello-rust/target/release/hello_rust" "$MSI_ROOT/hello_rust.exe" 2>/dev/null || cp "$MSI_ROOT/hello.exe" "$MSI_ROOT/hello_rust.exe"
     else
-        cp "$MSI_ROOT/hello.exe" "$MSI_ROOT/hello-rust.exe"
+        cp "$MSI_ROOT/hello.exe" "$MSI_ROOT/hello_rust.exe"
     fi
 
     if command -v go >/dev/null 2>&1 && [ -d "$SRC/hello-go" ]; then
@@ -66,7 +66,7 @@ elif command -v wixl >/dev/null 2>&1; then
 
     echo "==> Packaging MSI with wixl..."
     wixl -v -a x64 -o "$DIST_DIR/hello-${VERSION}-x64.msi" "$MSI_ROOT/hello.wxs"
-    rm -f "$MSI_ROOT/hello.exe" "$MSI_ROOT/hello-rust.exe" "$MSI_ROOT/hello_go.exe"
+    rm -f "$MSI_ROOT/hello.exe" "$MSI_ROOT/hello_rust.exe" "$MSI_ROOT/hello_go.exe"
 
 else
     echo "!!! Neither WiX Toolset (candle/light) nor msitools (wixl) found."

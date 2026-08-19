@@ -23,10 +23,10 @@ override_dh_auto_build:
 
 override_dh_auto_install:
 	dh_auto_install
-	if [ -n "$(DEB_HOST_RUST_TYPE)" ] && [ -f hello-rust/target/$(DEB_HOST_RUST_TYPE)/release/hello ]; then \
-		install -D -m 755 hello-rust/target/$(DEB_HOST_RUST_TYPE)/release/hello debian/hello/usr/bin/hello-rust; \
-	elif [ -f hello-rust/target/release/hello ]; then \
-		install -D -m 755 hello-rust/target/release/hello debian/hello/usr/bin/hello-rust; \
+	if [ -n "$(DEB_HOST_RUST_TYPE)" ] && [ -f hello-rust/target/$(DEB_HOST_RUST_TYPE)/release/hello_rust ]; then \
+		install -D -m 755 hello-rust/target/$(DEB_HOST_RUST_TYPE)/release/hello_rust debian/hello/usr/bin/hello_rust; \
+	elif [ -f hello-rust/target/release/hello_rust ]; then \
+		install -D -m 755 hello-rust/target/release/hello_rust debian/hello/usr/bin/hello_rust; \
 	fi
 	if [ -f hello-go/hello_go ]; then \
 		install -D -m 755 hello-go/hello_go debian/hello/usr/bin/hello_go; \

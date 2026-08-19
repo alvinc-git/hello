@@ -45,8 +45,8 @@ mkdir -p "$APPDIR/usr/bin" \
 
 # Install binaries
 cp "$SRC/hello" "$APPDIR/usr/bin/hello"
-if [ -f "$SRC/hello-rust/target/release/hello" ]; then
-    cp "$SRC/hello-rust/target/release/hello" "$APPDIR/usr/bin/hello-rust"
+if [ -f "$SRC/hello-rust/target/release/hello_rust" ]; then
+    cp "$SRC/hello-rust/target/release/hello_rust" "$APPDIR/usr/bin/hello_rust"
 fi
 if [ -f "$SRC/hello-go/hello_go" ]; then
     cp "$SRC/hello-go/hello_go" "$APPDIR/usr/bin/hello_go"
@@ -56,8 +56,8 @@ fi
 if [ -f "$SRC/man/hello.1" ]; then
     cp "$SRC/man/hello.1" "$APPDIR/usr/share/man/man1/"
 fi
-if [ -f "$SRC/man/hello-rust.1" ]; then
-    cp "$SRC/man/hello-rust.1" "$APPDIR/usr/share/man/man1/"
+if [ -f "$SRC/man/hello_rust.1" ]; then
+    cp "$SRC/man/hello_rust.1" "$APPDIR/usr/share/man/man1/"
 fi
 if [ -f "$SRC/man/hello_go.1" ]; then
     cp "$SRC/man/hello_go.1" "$APPDIR/usr/share/man/man1/"

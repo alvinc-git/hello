@@ -15,7 +15,7 @@
 ## Features
 
 - **C Implementation (`hello`)**: Lightweight C99 / POSIX implementation.
-- **Rust Implementation (`hello-rust`)**: Zero-dependency pure Rust standard library implementation.
+- **Rust Implementation (`hello_rust`)**: Zero-dependency pure Rust standard library implementation.
 - **Go Implementation (`hello_go`)**: Zero-dependency pure Go standard library implementation.
 - **Build System**: Unified GNU Autotools (`autoconf` + `automake`).
 - **Packaging Parity**: Automated packaging across Debian (`.deb`), RPM (`.rpm`), Flatpak (`.flatpak`), AppImage (`.AppImage`), Snap (`.snap`), Windows MSI (`.msi`), and macOS Homebrew with man pages.
@@ -61,7 +61,7 @@ hello/
 │   │   └── test-build.sh      # Standalone build test script
 │   ├── man/
 │   │   ├── hello.1            # Manual page for C program
-│   │   ├── hello-rust.1       # Manual page for Rust program
+│   │   ├── hello_rust.1       # Manual page for Rust program
 │   │   └── hello_go.1         # Manual page for Go program
 │   ├── debian/                # Debian packaging definitions (3.0 quilt)
 │   │   ├── changelog
@@ -111,7 +111,7 @@ make
 
 This builds:
 - `hello` (C executable)
-- `hello-rust` (Rust executable, when `cargo` is present)
+- `hello_rust` (Rust executable, when `cargo` is present)
 - `hello_go` (Go executable, when `go` is present)
 
 ### Standalone Rust Build
@@ -139,7 +139,7 @@ go build -ldflags "-X main.programVersion=1.0.0" -o hello_go main.go
 ./hello-1.0.0/hello --version
 
 # Run the Rust implementation
-./hello-1.0.0/hello-rust/target/release/hello
+./hello-1.0.0/hello-rust/target/release/hello_rust
 
 # Run the Go implementation
 ./hello-1.0.0/hello-go/hello_go

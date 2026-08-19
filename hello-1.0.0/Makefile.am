@@ -31,7 +31,7 @@ EXTRA_DIST = \
 # `make install`.  The dist_ prefix puts them in the release tarball.
 dist_man_MANS = \
 	man/hello.1 \
-	man/hello-rust.1 \
+	man/hello_rust.1 \
 	man/hello_go.1
 
 bin_PROGRAMS = hello
@@ -60,9 +60,9 @@ hello-go-build:
 	cd $(srcdir)/hello-go && go build -ldflags "-X main.programVersion=$(PACKAGE_VERSION)" -o hello_go main.go
 
 install-exec-hook:
-	if [ -f $(srcdir)/hello-rust/target/release/hello ]; then \
+	if [ -f $(srcdir)/hello-rust/target/release/hello_rust ]; then \
 		$(MKDIR_P) $(DESTDIR)$(bindir) && \
-		$(INSTALL_PROGRAM) $(srcdir)/hello-rust/target/release/hello $(DESTDIR)$(bindir)/hello-rust; \
+		$(INSTALL_PROGRAM) $(srcdir)/hello-rust/target/release/hello_rust $(DESTDIR)$(bindir)/hello_rust; \
 	fi
 	if [ -f $(srcdir)/hello-go/hello_go ]; then \
 		$(MKDIR_P) $(DESTDIR)$(bindir) && \

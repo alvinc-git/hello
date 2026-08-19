@@ -14,7 +14,7 @@
 - **Standards:** C99 / POSIX compliant.
 - **Features:** Standard greeting output ("Hello, World!"), command-line options (`-h`, `--help`, `-v`, `-V`, `--version`).
 
-### Rust Program (`hello-rust`)
+### Rust Program (`hello_rust`)
 - **Source:** `hello-1.0.0/hello-rust/src/main.rs`
 - **Manifest:** `hello-1.0.0/hello-rust/Cargo.toml`
 - **Dependencies:** Pure standard library (`std`), zero external crates.
@@ -26,7 +26,7 @@
 
 ### Unified Autotools Build
 - `hello-1.0.0/configure.ac`: Configures compiler strictness (`STRICT_CFLAGS`), hardening flags (`HARDEN_CFLAGS`, `HARDEN_LDFLAGS`), and detects Cargo toolchain for Rust builds.
-- `hello-1.0.0/Makefile.am`: Builds C executable, invokes Cargo release build when available, installs `hello` and `hello-rust` binaries, and distributes manual pages.
+- `hello-1.0.0/Makefile.am`: Builds C executable, invokes Cargo release build when available, installs `hello` and `hello_rust` binaries, and distributes manual pages.
 
 ### Debian Packaging (`3.0 quilt`)
 - Defined in `hello-1.0.0/debian/`.
@@ -36,7 +36,7 @@
 ### RPM Packaging
 - Defined in `hello-1.0.0/rpm/SPECS/hello.spec`.
 - Automated build via `./ci/build-rpm.sh`.
-- Packages `hello`, `hello-rust`, and man pages into `hello-1.0.0/rpm/RPMS/` and `hello-1.0.0/rpm/SRPMS/`.
+- Packages `hello`, `hello_rust`, and man pages into `hello-1.0.0/rpm/RPMS/` and `hello-1.0.0/rpm/SRPMS/`.
 
 ---
 

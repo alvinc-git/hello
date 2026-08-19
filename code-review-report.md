@@ -21,11 +21,11 @@ A comprehensive cleanup and review of the repository was completed to eliminate 
 
 ### B. Build System & Autotools
 - [x] **Autoconf (`hello-1.0.0/configure.ac`)**: Removed all obsolete daemon/systemd checks. Properly probes compiler flags, hardening options, and Cargo availability via `AC_PATH_PROG`.
-- [x] **Automake (`hello-1.0.0/Makefile.am`)**: Targets clean binaries (`hello` and `hello-rust`), distributes man pages, and integrates Cargo build lifecycle hooks without errors.
+- [x] **Automake (`hello-1.0.0/Makefile.am`)**: Targets clean binaries (`hello` and `hello_rust`), distributes man pages, and integrates Cargo build lifecycle hooks without errors.
 - [x] **Zero-Warning Guarantee**: Clean compilation across all targets.
 
 ### C. Manual Pages
-- [x] Replaced legacy daemon/service man pages with `man/hello.1` and `man/hello-rust.1`.
+- [x] Replaced legacy daemon/service man pages with `man/hello.1` and `man/hello_rust.1`.
 
 ### D. Packaging Parity & Co-location (Debian & RPM)
 - [x] **Debian (`hello-1.0.0/debian/`)**: Package definitions (`control`, `rules`, `changelog`, `copyright`) updated for `hello` 1.0.0 under MIT license. Obsolete override files purged.

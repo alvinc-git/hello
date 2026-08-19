@@ -32,7 +32,7 @@
       </Component>
 
       <Component Id="RustExecutable" Guid="6E8F0A1B-3456-789A-BCDE-F0123456789A" Win64="yes">
-        <File Id="HelloRustExe" Source="hello-rust.exe" KeyPath="yes" />
+        <File Id="HelloRustExe" Source="hello_rust.exe" KeyPath="yes" />
       </Component>
 
       <Component Id="GoExecutable" Guid="8A0B2C3D-5678-90AB-CDEF-1234567890BC" Win64="yes">

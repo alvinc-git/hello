@@ -21,7 +21,7 @@ cd hello-1.0.0
 make
 ```
 
-Produces binaries: `hello` (C program), `hello-rust` (zero-dependency Rust program, when `cargo` is present), and `hello_go` (zero-dependency Go program, when `go` is present).
+Produces binaries: `hello` (C program), `hello_rust` (zero-dependency Rust program, when `cargo` is present), and `hello_go` (zero-dependency Go program, when `go` is present).
 
 `configure` prints a summary of what it resolved. Relevant options:
 
@@ -46,13 +46,13 @@ Careful when checking for warnings: a bare second `make` is a no-op and will rep
 ./hello --help        # Prints usage
 ./hello --version     # Prints version
 
-./hello-rust/target/release/hello  # Rust program
-./hello-go/hello_go                # Go program
+./hello-rust/target/release/hello_rust  # Rust program
+./hello-go/hello_go                    # Go program
 ```
 
 ## Packaging (Debian, RPM, Flatpak, AppImage, Snap, MSI & Homebrew)
 
-Multiple packaging frameworks package `hello` (C), `hello-rust` (Rust), and `hello_go` (Go) together:
+Multiple packaging frameworks package `hello` (C), `hello_rust` (Rust), and `hello_go` (Go) together:
 
 - **Debian packaging:** `hello-1.0.0/debian/` (build script: `./ci/build.sh`)
 - **RPM packaging:** `hello-1.0.0/rpm/` (build script: `./ci/build-rpm.sh`)

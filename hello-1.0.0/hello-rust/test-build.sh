@@ -4,7 +4,7 @@
 
 set -euo pipefail
 
-echo "Testing Rust hello build..."
+echo "Testing Rust hello_rust build..."
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
@@ -17,15 +17,18 @@ fi
 echo "Building release binary..."
 cargo build --release
 
-if [ -f "target/release/hello" ]; then
+if [ -f "target/release/hello_rust" ]; then
     echo "✅ Build successful!"
-    echo "Binary location: target/release/hello"
+    echo "Binary location: target/release/hello_rust"
     echo ""
     echo "Program output:"
-    ./target/release/hello
+    ./target/release/hello_rust
     echo ""
     echo "Program version info:"
-    ./target/release/hello --version
+    ./target/release/hello_rust --version
+    echo ""
+    echo "Program help info:"
+    ./target/release/hello_rust --help
 else
     echo "❌ Build failed!"
     exit 1

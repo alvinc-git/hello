@@ -1,6 +1,6 @@
 use std::env;
 
-const PROGRAM_NAME: &str = "hello";
+const PROGRAM_NAME: &str = "hello_rust";
 const PROGRAM_VERSION: &str = "1.0.0";
 
 fn print_usage() {
