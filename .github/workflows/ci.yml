@@ -3,7 +3,7 @@ name: CI & Packaging
 on:
   push:
     branches: [ main, master ]
-    tags: [ 'v*' ]
+    tags: [ 'v*', '[0-9]*' ]
   pull_request:
     branches: [ main, master ]
 
@@ -77,7 +77,7 @@ jobs:
 
   release:
     name: GitHub Release
-    if: startsWith(github.ref, 'refs/tags/v')
+    if: startsWith(github.ref, 'refs/tags/')
     needs: [ debian-build, rpm-build ]
     runs-on: ubuntu-latest
     permissions:
