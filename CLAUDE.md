@@ -46,12 +46,13 @@ Careful when checking for warnings: a bare second `make` is a no-op and will rep
 ./hello --version     # Prints version
 ```
 
-## Packaging (Debian & RPM)
+## Packaging (Debian, RPM & Flatpak)
 
-Both Debian (`dpkg-buildpackage`) and RPM (`rpmbuild`) frameworks package `hello` (C) and `hello-rust` (Rust) together.
+Debian (`dpkg-buildpackage`), RPM (`rpmbuild`), and Flatpak (`flatpak-builder`) frameworks package `hello` (C) and `hello-rust` (Rust) together.
 
-- **Debian packaging:** `./ci/build.sh`
-- **RPM packaging:** `./ci/build-rpm.sh`
+- **Debian packaging:** `hello-1.0.0/debian/` (build script: `./ci/build.sh`)
+- **RPM packaging:** `hello-1.0.0/rpm/` (build script: `./ci/build-rpm.sh`)
+- **Flatpak packaging:** `hello-1.0.0/flatpak/` (build script: `./ci/build-flatpak.sh`)
 
 ```bash
 # Debian manual packaging:

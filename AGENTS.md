@@ -41,13 +41,12 @@ cargo build --release
 2. **Standard Option Support:**
    - Both C and Rust programs support `-h`/`--help` and `-v`/`-V`/`--version` flags while printing "Hello, World!" by default.
 
----
-
 ## 4. Packaging Infrastructure
 
-Both Debian and RPM packaging build and package `hello` and `hello-rust` together:
-- **Debian Packaging:** `./ci/build.sh` (outputs `.deb` artifacts in `build/dist/`)
-- **RPM Packaging:** `./ci/build-rpm.sh` (outputs `.rpm` artifacts in `hello-1.0.0/rpm/RPMS/`)
+Debian, RPM, and Flatpak packaging build and package `hello` and `hello-rust` together:
+- **Debian Packaging:** `hello-1.0.0/debian/` (script: `./ci/build.sh`, outputs in `build/dist/`)
+- **RPM Packaging:** `hello-1.0.0/rpm/` (script: `./ci/build-rpm.sh`, outputs in `hello-1.0.0/rpm/RPMS/`)
+- **Flatpak Packaging:** `hello-1.0.0/flatpak/` (script: `./ci/build-flatpak.sh`, outputs in `hello-1.0.0/flatpak/dist/`)
 
 ---
 

@@ -75,10 +75,38 @@ jobs:
             hello-1.0.0/rpm/SRPMS/**/*.rpm
           if-no-files-found: error
 
+  flatpak-build:
+    name: Flatpak Package Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install Flatpak & flatpak-builder
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends flatpak flatpak-builder elfutils
+          flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+          flatpak install --user -y flathub org.freedesktop.Platform//24.08 org.freedesktop.Sdk//24.08 org.freedesktop.Sdk.Extension.rust-stable//24.08
+
+      - name: Build Flatpak packages
+        run: |
+          chmod +x ci/build-flatpak.sh
+          ./ci/build-flatpak.sh
+
+      - name: Upload Flatpak artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: flatpak-packages
+          path: hello-1.0.0/flatpak/dist/*.flatpak
+          if-no-files-found: error
+
   release:
     name: GitHub Release
     if: startsWith(github.ref, 'refs/tags/')
-    needs: [ debian-build, rpm-build ]
+    needs: [ debian-build, rpm-build, flatpak-build ]
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -98,4 +126,5 @@ jobs:
           files: |
             release-artifacts/*
             release-artifacts/**/*.rpm
+            release-artifacts/**/*.flatpak
           generate_release_notes: true

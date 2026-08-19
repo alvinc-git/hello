@@ -101,6 +101,26 @@ Package artifacts land in `hello-1.0.0/rpm/RPMS/` and `hello-1.0.0/rpm/SRPMS/`:
 
 ---
 
-## 6. Continuous Integration
+## 6. Flatpak Packaging (`.flatpak`)
 
-Automated builds and packaging tests run on GitHub Actions on every push and pull request via `.github/workflows/ci.yml`. Tagged releases (`v*`) automatically build and attach all packages to the corresponding GitHub Release.
+To build the Flatpak package and create a single-file bundle:
+
+```bash
+./ci/build-flatpak.sh
+```
+
+Package artifacts land in `hello-1.0.0/flatpak/dist/`:
+- `hello-1.0.0/flatpak/dist/io.github.alvinc_git.hello-1.0.0.flatpak`
+
+To test locally with `flatpak`:
+```bash
+flatpak install --user hello-1.0.0/flatpak/dist/io.github.alvinc_git.hello-1.0.0.flatpak
+flatpak run io.github.alvinc_git.hello
+flatpak run --command=hello-rust io.github.alvinc_git.hello
+```
+
+---
+
+## 7. Continuous Integration
+
+Automated builds and packaging tests run on GitHub Actions on every push and pull request via `.github/workflows/ci.yml`. Tagged releases (`1.0.0`, `v*`) automatically build and attach all packages (Debian `.deb`, RPM `.rpm`, and Flatpak `.flatpak`) to the corresponding GitHub Release.

@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **Flatpak Packaging**: Added Flatpak packaging definitions (`hello-1.0.0/flatpak/`), AppStream metainfo, desktop entry, automated build script (`ci/build-flatpak.sh`), and GitHub Actions workflow job.
+
 ## [1.0.0] - 2026-08-18
 
 ### Added

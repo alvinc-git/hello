@@ -16,7 +16,7 @@
 - **C Implementation (`hello`)**: Lightweight C99 / POSIX implementation.
 - **Rust Implementation (`hello-rust`)**: Zero-dependency pure Rust standard library implementation.
 - **Build System**: Unified GNU Autotools (`autoconf` + `automake`).
-- **Packaging Parity**: Automated Debian and RPM packaging with man pages.
+- **Packaging Parity**: Automated Debian, RPM, and Flatpak packaging with man pages.
 - **Continuous Integration**: GitHub Actions automated build, test, and release workflows.
 
 ---
@@ -31,6 +31,7 @@ hello/
 ├── ci/
 │   ├── build.sh               # Debian packaging and lintian verification script
 │   ├── build-rpm.sh           # RPM packaging automation script
+│   ├── build-flatpak.sh       # Flatpak packaging automation script
 │   └── publish.sh             # GitHub Releases publishing script
 ├── docs/
 │   └── BUILD_HOWTO.md         # Detailed build and packaging guide
@@ -56,10 +57,16 @@ hello/
 │   │   ├── copyright
 │   │   ├── rules
 │   │   └── source/format
-│   └── rpm/                   # RPM packaging definitions
+│   ├── rpm/                   # RPM packaging definitions
+│   │   ├── README.md
+│   │   └── SPECS/
+│   │       └── hello.spec     # RPM package specification
+│   └── flatpak/               # Flatpak packaging definitions
 │       ├── README.md
-│       └── SPECS/
-│           └── hello.spec     # RPM package specification
+│       ├── io.github.alvinc_git.hello.yaml
+│       ├── io.github.alvinc_git.hello.json
+│       ├── io.github.alvinc_git.hello.metainfo.xml
+│       └── io.github.alvinc_git.hello.desktop
 ```
 
 ---
@@ -115,6 +122,12 @@ Build outputs land in `build/dist/` (including `.deb`, `.dsc`, `.tar.xz`, and `S
 ./ci/build-rpm.sh
 ```
 Build outputs land in `hello-1.0.0/rpm/RPMS/` and `hello-1.0.0/rpm/SRPMS/`.
+
+### Flatpak Package (`.flatpak`)
+```bash
+./ci/build-flatpak.sh
+```
+Build outputs land in `hello-1.0.0/flatpak/dist/` (e.g. `io.github.alvinc_git.hello-1.0.0.flatpak`).
 
 ---
 

@@ -1,0 +1,36 @@
+{
+  "app-id": "io.github.alvinc_git.hello",
+  "runtime": "org.freedesktop.Platform",
+  "runtime-version": "24.08",
+  "sdk": "org.freedesktop.Sdk",
+  "sdk-extensions": [
+    "org.freedesktop.Sdk.Extension.rust-stable"
+  ],
+  "command": "hello",
+  "finish-args": [
+    "--share=network",
+    "--filesystem=host"
+  ],
+  "modules": [
+    {
+      "name": "hello",
+      "buildsystem": "autotools",
+      "build-options": {
+        "append-path": "/usr/lib/sdk/rust-stable/bin",
+        "env": {
+          "CARGO_HOME": "/run/build/hello/cargo"
+        }
+      },
+      "sources": [
+        {
+          "type": "dir",
+          "path": ".."
+        }
+      ],
+      "post-install": [
+        "install -Dm644 io.github.alvinc_git.hello.metainfo.xml /app/share/metainfo/io.github.alvinc_git.hello.metainfo.xml",
+        "install -Dm644 io.github.alvinc_git.hello.desktop /app/share/applications/io.github.alvinc_git.hello.desktop"
+      ]
+    }
+  ]
+}

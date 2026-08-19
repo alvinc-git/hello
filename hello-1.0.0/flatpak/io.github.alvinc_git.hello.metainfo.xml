@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="console-application">
+  <id>io.github.alvinc_git.hello</id>
+  <metadata_license>MIT</metadata_license>
+  <project_license>MIT</project_license>
+  <name>hello</name>
+  <summary>Standard Hello program in C and Rust</summary>
+  <description>
+    <p>
+      hello is the standard Hello program, featuring both a lightweight C99 implementation
+      and a zero-dependency Rust implementation.
+    </p>
+  </description>
+  <provides>
+    <binary>hello</binary>
+    <binary>hello-rust</binary>
+  </provides>
+  <releases>
+    <release version="1.0.0" date="2026-08-18"/>
+  </releases>
+  <url type="homepage">https://github.com/alvinc-git/hello</url>
+  <url type="bugtracker">https://github.com/alvinc-git/hello/issues</url>
+</component>

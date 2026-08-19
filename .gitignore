@@ -104,5 +104,14 @@ hello-1.0.0/rpm/RPMS/
 hello-1.0.0/rpm/SOURCES/
 hello-1.0.0/rpm/SRPMS/
 
+# ---------------------------------------------------------------------------
+# Flatpak build output
+# ---------------------------------------------------------------------------
+hello-1.0.0/flatpak/.flatpak-builder/
+hello-1.0.0/flatpak/build-dir/
+hello-1.0.0/flatpak/repo/
+hello-1.0.0/flatpak/dist/
+*.flatpak
+
 # Aider history
 .aider*
