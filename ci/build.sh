@@ -16,7 +16,7 @@ DIST="$BUILD/dist"
 
 # Exactly the lintian tags this package is known to emit. Anything else is a
 # regression and fails the build.
-KNOWN_LINTIAN_TAGS='bad-distribution-in-changes-file|initial-upload-closes-no-bugs'
+KNOWN_LINTIAN_TAGS='bad-distribution-in-changes-file|initial-upload-closes-no-bugs|statically-linked-binary'
 
 rm -rf "$BUILD"
 mkdir -p "$DIST"

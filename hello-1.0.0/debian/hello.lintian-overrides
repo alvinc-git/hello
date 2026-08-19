@@ -1,0 +1,6 @@
+# hello -- Lintian overrides
+#
+# hello_go is statically linked by pure standard library design (zero dependencies).
+hello: statically-linked-binary *
+hello: statically-linked-binary [usr/bin/hello_go]
+hello: statically-linked-binary usr/bin/hello_go
