@@ -34,9 +34,9 @@
 - Generates binary `.deb`, source `.dsc`, and checksum manifests in `build/dist/`.
 
 ### RPM Packaging
-- Defined in `rpm/SPECS/hello.spec`.
+- Defined in `hello-1.0.0/rpm/SPECS/hello.spec`.
 - Automated build via `./ci/build-rpm.sh`.
-- Packages `hello`, `hello-rust`, and man pages into `rpm/RPMS/` and `rpm/SRPMS/`.
+- Packages `hello`, `hello-rust`, and man pages into `hello-1.0.0/rpm/RPMS/` and `hello-1.0.0/rpm/SRPMS/`.
 
 ---
 

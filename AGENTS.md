@@ -47,7 +47,7 @@ cargo build --release
 
 Both Debian and RPM packaging build and package `hello` and `hello-rust` together:
 - **Debian Packaging:** `./ci/build.sh` (outputs `.deb` artifacts in `build/dist/`)
-- **RPM Packaging:** `./ci/build-rpm.sh` (outputs `.rpm` artifacts in `rpm/RPMS/`)
+- **RPM Packaging:** `./ci/build-rpm.sh` (outputs `.rpm` artifacts in `hello-1.0.0/rpm/RPMS/`)
 
 ---
 

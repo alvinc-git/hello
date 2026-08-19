@@ -1,13 +1,14 @@
 #!/bin/bash
 
 # Build RPM package for hello
-# This script builds the RPM package for hello
+# This script builds the RPM package for hello from within the active source root
 
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 SRC="$REPO_ROOT/hello-1.0.0"
+RPM_ROOT="$SRC/rpm"
 
 echo "Building RPM package for hello version 1.0.0..."
 
@@ -31,14 +32,13 @@ make dist
 
 # Copy tarball to RPM SOURCES directory
 echo "Copying source tarball to RPM SOURCES..."
-mkdir -p "$REPO_ROOT/rpm/SOURCES" "$REPO_ROOT/rpm/BUILD" "$REPO_ROOT/rpm/RPMS" "$REPO_ROOT/rpm/SRPMS"
-cp hello-1.0.0.tar.xz "$REPO_ROOT/rpm/SOURCES/"
+mkdir -p "$RPM_ROOT/SOURCES" "$RPM_ROOT/BUILD" "$RPM_ROOT/RPMS" "$RPM_ROOT/SRPMS"
+cp hello-1.0.0.tar.xz "$RPM_ROOT/SOURCES/"
 
 # Build the RPM package
 echo "Building RPM package..."
-cd "$REPO_ROOT/rpm"
-rpmbuild --define "_topdir $REPO_ROOT/rpm" -ba SPECS/hello.spec
+rpmbuild --define "_topdir $RPM_ROOT" -ba "$RPM_ROOT/SPECS/hello.spec"
 
 echo "RPM build complete!"
-echo "RPM packages are in: rpm/RPMS/"
-echo "Source RPM is in: rpm/SRPMS/"
+echo "RPM packages are in: hello-1.0.0/rpm/RPMS/"
+echo "Source RPM is in: hello-1.0.0/rpm/SRPMS/"

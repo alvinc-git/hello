@@ -71,8 +71,8 @@ jobs:
         with:
           name: rpm-packages
           path: |
-            rpm/RPMS/**/*.rpm
-            rpm/SRPMS/**/*.rpm
+            hello-1.0.0/rpm/RPMS/**/*.rpm
+            hello-1.0.0/rpm/SRPMS/**/*.rpm
           if-no-files-found: error
 
   release:

@@ -50,15 +50,16 @@ hello/
 │   ├── man/
 │   │   ├── hello.1            # Manual page for C program
 │   │   └── hello-rust.1       # Manual page for Rust program
-│   └── debian/                # Debian packaging definitions (3.0 quilt)
-│       ├── changelog
-│       ├── control
-│       ├── copyright
-│       ├── rules
-│       └── source/format
-└── rpm/
-    └── SPECS/
-        └── hello.spec         # RPM package specification
+│   ├── debian/                # Debian packaging definitions (3.0 quilt)
+│   │   ├── changelog
+│   │   ├── control
+│   │   ├── copyright
+│   │   ├── rules
+│   │   └── source/format
+│   └── rpm/                   # RPM packaging definitions
+│       ├── README.md
+│       └── SPECS/
+│           └── hello.spec     # RPM package specification
 ```
 
 ---
@@ -113,7 +114,7 @@ Build outputs land in `build/dist/` (including `.deb`, `.dsc`, `.tar.xz`, and `S
 ```bash
 ./ci/build-rpm.sh
 ```
-Build outputs land in `rpm/RPMS/` and `rpm/SRPMS/`.
+Build outputs land in `hello-1.0.0/rpm/RPMS/` and `hello-1.0.0/rpm/SRPMS/`.
 
 ---
 

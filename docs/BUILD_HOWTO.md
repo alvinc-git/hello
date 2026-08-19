@@ -95,9 +95,9 @@ To build the RPM package:
 ./ci/build-rpm.sh
 ```
 
-Package artifacts land in `rpm/RPMS/` and `rpm/SRPMS/`:
-- `rpm/RPMS/<arch>/hello-1.0.0-1.<dist>.<arch>.rpm`
-- `rpm/SRPMS/hello-1.0.0-1.<dist>.src.rpm`
+Package artifacts land in `hello-1.0.0/rpm/RPMS/` and `hello-1.0.0/rpm/SRPMS/`:
+- `hello-1.0.0/rpm/RPMS/<arch>/hello-1.0.0-1.<dist>.<arch>.rpm`
+- `hello-1.0.0/rpm/SRPMS/hello-1.0.0-1.<dist>.src.rpm`
 
 ---
 

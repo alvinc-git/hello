@@ -3,7 +3,7 @@
 ![RPM Package](https://img.shields.io/badge/RPM-x86__64-CC0000?style=for-the-badge&logo=redhat)
 ![Version](https://img.shields.io/badge/version-1.0.0-0052CC?style=for-the-badge)
 
-This directory contains the RPM packaging infrastructure for `hello` (The standard Hello program).
+This directory contains the RPM packaging infrastructure for `hello` (The standard Hello program). It is located within the versioned source directory alongside `debian/` to support version-isolated packaging evolution.
 
 ## Structure
 
@@ -25,19 +25,19 @@ To build the RPM package:
 Or manually:
 
 ```bash
-# First create the source tarball
 cd hello-1.0.0
+
+# 1. Generate release source tarball
 ./autogen.sh
 ./configure
 make dist
 
-# Copy the tarball to the SOURCES directory
-mkdir -p ../rpm/SOURCES
-cp hello-1.0.0.tar.xz ../rpm/SOURCES/
+# 2. Setup RPM build tree
+mkdir -p rpm/SOURCES rpm/BUILD rpm/RPMS rpm/SRPMS
+cp hello-1.0.0.tar.xz rpm/SOURCES/
 
-# Build the RPM
-cd ../rpm
-rpmbuild --define "_topdir $(pwd)" -ba SPECS/hello.spec
+# 3. Build RPM packages
+rpmbuild --define "_topdir $(pwd)/rpm" -ba rpm/SPECS/hello.spec
 ```
 
-The resulting packages will be in `rpm/RPMS/` and `rpm/SRPMS/`.
+The resulting packages will be in `hello-1.0.0/rpm/RPMS/` and `hello-1.0.0/rpm/SRPMS/`.

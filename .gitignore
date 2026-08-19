@@ -98,6 +98,11 @@ rpm/BUILDROOT/
 rpm/RPMS/
 rpm/SOURCES/
 rpm/SRPMS/
+hello-1.0.0/rpm/BUILD/
+hello-1.0.0/rpm/BUILDROOT/
+hello-1.0.0/rpm/RPMS/
+hello-1.0.0/rpm/SOURCES/
+hello-1.0.0/rpm/SRPMS/
 
 # Aider history
 .aider*
