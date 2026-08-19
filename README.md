@@ -117,6 +117,14 @@ Build outputs land in `rpm/RPMS/` and `rpm/SRPMS/`.
 
 ---
 
+## Documentation & Contributing
+
+- [Changelog](file:///Users/acura/github/hello/CHANGELOG.md): History of notable changes and releases.
+- [Contributing Guide](file:///Users/acura/github/hello/CONTRIBUTING.md): Guidelines for developing, testing, and submitting contributions.
+- [Build HOWTO](file:///Users/acura/github/hello/docs/BUILD_HOWTO.md): In-depth build and packaging details.
+
+---
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](file:///Users/acura/github/hello/LICENSE) file for details.
