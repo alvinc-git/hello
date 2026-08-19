@@ -23,6 +23,15 @@ mkdir -p "$DIST_DIR"
 
 cd "$MSI_ROOT"
 
+# Auto-install msitools if running on Debian/Ubuntu with sudo
+if ! command -v candle.exe >/dev/null 2>&1 && ! command -v wixl >/dev/null 2>&1; then
+    if command -v apt-get >/dev/null 2>&1 && command -v sudo >/dev/null 2>&1; then
+        echo "==> Installing msitools and MinGW cross-compiler..."
+        sudo apt-get update -qq || true
+        sudo apt-get install -y --no-install-recommends wixl msitools gcc-mingw-w64-x86-64 binutils-mingw-w64-x86-64 || true
+    fi
+fi
+
 # Check if running natively on Windows with WiX Toolset
 if command -v candle.exe >/dev/null 2>&1 && command -v light.exe >/dev/null 2>&1; then
     echo "==> Building natively using WiX Toolset..."
@@ -55,7 +64,7 @@ elif command -v wixl >/dev/null 2>&1; then
 
 else
     echo "!!! Neither WiX Toolset (candle/light) nor msitools (wixl) found."
-    echo "    On Linux: sudo apt-get install -y msitools gcc-mingw-w64-x86-64"
+    echo "    On Linux: sudo apt-get install -y wixl msitools gcc-mingw-w64-x86-64"
     exit 1
 fi
 
