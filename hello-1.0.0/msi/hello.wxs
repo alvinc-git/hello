@@ -30,17 +30,6 @@
           <Component Id="GoExecutable" Guid="8A0B2C3D-5678-90AB-CDEF-1234567890BC" Win64="yes">
             <File Id="HelloGoExe" Source="hello_go.exe" KeyPath="yes" />
           </Component>
-
-          <Component Id="PathEnvironment" Guid="7F9A1B2C-4567-89AB-CDEF-0123456789AB" Win64="yes">
-            <CreateFolder />
-            <Environment Id="PATH"
-                         Name="PATH"
-                         Value="[INSTALLFOLDER]"
-                         Permanent="no"
-                         Part="last"
-                         Action="set"
-                         System="yes" />
-          </Component>
         </Directory>
       </Directory>
     </Directory>
@@ -49,7 +38,6 @@
       <ComponentRef Id="CExecutable" />
       <ComponentRef Id="RustExecutable" />
       <ComponentRef Id="GoExecutable" />
-      <ComponentRef Id="PathEnvironment" />
     </Feature>
   </Product>
 </Wix>
