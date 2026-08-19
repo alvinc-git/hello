@@ -16,7 +16,7 @@
 - **C Implementation (`hello`)**: Lightweight C99 / POSIX implementation.
 - **Rust Implementation (`hello-rust`)**: Zero-dependency pure Rust standard library implementation.
 - **Build System**: Unified GNU Autotools (`autoconf` + `automake`).
-- **Packaging Parity**: Automated Debian, RPM, and Flatpak packaging with man pages.
+- **Packaging Parity**: Automated Debian, RPM, Flatpak, and AppImage packaging with man pages.
 - **Continuous Integration**: GitHub Actions automated build, test, and release workflows.
 
 ---
@@ -32,6 +32,7 @@ hello/
 │   ├── build.sh               # Debian packaging and lintian verification script
 │   ├── build-rpm.sh           # RPM packaging automation script
 │   ├── build-flatpak.sh       # Flatpak packaging automation script
+│   ├── build-appimage.sh      # AppImage packaging automation script
 │   └── publish.sh             # GitHub Releases publishing script
 ├── docs/
 │   └── BUILD_HOWTO.md         # Detailed build and packaging guide
@@ -61,12 +62,17 @@ hello/
 │   │   ├── README.md
 │   │   └── SPECS/
 │   │       └── hello.spec     # RPM package specification
-│   └── flatpak/               # Flatpak packaging definitions
+│   ├── flatpak/               # Flatpak packaging definitions
+│   │   ├── README.md
+│   │   ├── io.github.alvinc_git.hello.yaml
+│   │   ├── io.github.alvinc_git.hello.json
+│   │   ├── io.github.alvinc_git.hello.metainfo.xml
+│   │   └── io.github.alvinc_git.hello.desktop
+│   └── appimage/              # AppImage packaging definitions
 │       ├── README.md
-│       ├── io.github.alvinc_git.hello.yaml
-│       ├── io.github.alvinc_git.hello.json
-│       ├── io.github.alvinc_git.hello.metainfo.xml
-│       └── io.github.alvinc_git.hello.desktop
+│       ├── AppRun
+│       ├── hello.desktop
+│       └── hello.svg
 ```
 
 ---
@@ -128,6 +134,12 @@ Build outputs land in `hello-1.0.0/rpm/RPMS/` and `hello-1.0.0/rpm/SRPMS/`.
 ./ci/build-flatpak.sh
 ```
 Build outputs land in `hello-1.0.0/flatpak/dist/` (e.g. `io.github.alvinc_git.hello-1.0.0.flatpak`).
+
+### AppImage Package (`.AppImage`)
+```bash
+./ci/build-appimage.sh
+```
+Build outputs land in `hello-1.0.0/appimage/dist/` (e.g. `hello-1.0.0-x86_64.AppImage`).
 
 ---
 

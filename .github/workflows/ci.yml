@@ -103,10 +103,38 @@ jobs:
           path: hello-1.0.0/flatpak/dist/*.flatpak
           if-no-files-found: error
 
+  appimage-build:
+    name: AppImage Package Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends \
+            build-essential autoconf automake pkg-config cargo \
+            libfuse2 file xz-utils curl git
+
+      - name: Build AppImage package
+        run: |
+          chmod +x ci/build-appimage.sh
+          ./ci/build-appimage.sh
+
+      - name: Upload AppImage artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: appimage-packages
+          path: hello-1.0.0/appimage/dist/*.AppImage
+          if-no-files-found: error
+
   release:
     name: GitHub Release
     if: startsWith(github.ref, 'refs/tags/')
-    needs: [ debian-build, rpm-build, flatpak-build ]
+    needs: [ debian-build, rpm-build, flatpak-build, appimage-build ]
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -127,4 +155,5 @@ jobs:
             release-artifacts/*
             release-artifacts/**/*.rpm
             release-artifacts/**/*.flatpak
+            release-artifacts/**/*.AppImage
           generate_release_notes: true

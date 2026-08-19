@@ -113,5 +113,12 @@ hello-1.0.0/flatpak/repo/
 hello-1.0.0/flatpak/dist/
 *.flatpak
 
+# ---------------------------------------------------------------------------
+# AppImage build output
+# ---------------------------------------------------------------------------
+hello-1.0.0/appimage/AppDir/
+hello-1.0.0/appimage/dist/
+*.AppImage
+
 # Aider history
 .aider*

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Hello
+Comment=Standard Hello program in C and Rust
+Exec=hello
+Icon=hello
+Terminal=true
+Categories=Utility;ConsoleOnly;
+Keywords=hello;world;rust;c;

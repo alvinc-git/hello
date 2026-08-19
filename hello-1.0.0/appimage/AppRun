@@ -1,0 +1,23 @@
+#!/bin/bash
+# AppRun entrypoint script for hello AppImage
+
+set -e
+
+# Resolve AppDir root
+SELF=$(readlink -f "$0")
+HERE=${SELF%/*}
+
+# Set up environment
+export PATH="${HERE}/usr/bin:${PATH}"
+export LD_LIBRARY_PATH="${HERE}/usr/lib:${HERE}/usr/lib64:${LD_LIBRARY_PATH:-}"
+export XDG_DATA_DIRS="${HERE}/usr/share:${XDG_DATA_DIRS:-/usr/local/share:/usr/share}"
+export MANPATH="${HERE}/usr/share/man:${MANPATH:-}"
+
+# Check invocation name
+INVOCATION_NAME="$(basename "$0")"
+if [ "$INVOCATION_NAME" = "hello-rust" ]; then
+    exec "${HERE}/usr/bin/hello-rust" "$@"
+fi
+
+# Default to C implementation
+exec "${HERE}/usr/bin/hello" "$@"

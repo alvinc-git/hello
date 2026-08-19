@@ -119,8 +119,26 @@ flatpak run io.github.alvinc_git.hello
 flatpak run --command=hello-rust io.github.alvinc_git.hello
 ```
 
+## 7. AppImage Packaging (`.AppImage`)
+
+To build the standalone AppImage package:
+
+```bash
+./ci/build-appimage.sh
+```
+
+Package artifacts land in `hello-1.0.0/appimage/dist/`:
+- `hello-1.0.0/appimage/dist/hello-1.0.0-<arch>.AppImage`
+
+To run the AppImage:
+```bash
+chmod +x hello-1.0.0/appimage/dist/hello-1.0.0-*.AppImage
+./hello-1.0.0/appimage/dist/hello-1.0.0-*.AppImage
+./hello-1.0.0/appimage/dist/hello-1.0.0-*.AppImage --help
+```
+
 ---
 
-## 7. Continuous Integration
+## 8. Continuous Integration
 
-Automated builds and packaging tests run on GitHub Actions on every push and pull request via `.github/workflows/ci.yml`. Tagged releases (`1.0.0`, `v*`) automatically build and attach all packages (Debian `.deb`, RPM `.rpm`, and Flatpak `.flatpak`) to the corresponding GitHub Release.
+Automated builds and packaging tests run on GitHub Actions on every push and pull request via `.github/workflows/ci.yml`. Tagged releases (`1.0.0`, `v*`) automatically build and attach all packages (Debian `.deb`, RPM `.rpm`, Flatpak `.flatpak`, and AppImage `.AppImage`) to the corresponding GitHub Release.

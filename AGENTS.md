@@ -43,10 +43,11 @@ cargo build --release
 
 ## 4. Packaging Infrastructure
 
-Debian, RPM, and Flatpak packaging build and package `hello` and `hello-rust` together:
+Debian, RPM, Flatpak, and AppImage packaging build and package `hello` and `hello-rust` together:
 - **Debian Packaging:** `hello-1.0.0/debian/` (script: `./ci/build.sh`, outputs in `build/dist/`)
 - **RPM Packaging:** `hello-1.0.0/rpm/` (script: `./ci/build-rpm.sh`, outputs in `hello-1.0.0/rpm/RPMS/`)
 - **Flatpak Packaging:** `hello-1.0.0/flatpak/` (script: `./ci/build-flatpak.sh`, outputs in `hello-1.0.0/flatpak/dist/`)
+- **AppImage Packaging:** `hello-1.0.0/appimage/` (script: `./ci/build-appimage.sh`, outputs in `hello-1.0.0/appimage/dist/`)
 
 ---
 
