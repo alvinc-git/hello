@@ -33,12 +33,24 @@ cd "$FLATPAK_ROOT"
 rm -rf "$BUILD_DIR" "$REPO_DIR" "$DIST_DIR"
 mkdir -p "$DIST_DIR"
 
+# Ensure Flathub remote is added
+flatpak remote-add --user --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo 2>/dev/null || true
+
+BUILDER_FLAGS=("--force-clean" "--repo=$REPO_DIR" "--default-branch=stable")
+
+# If running as non-root, use --user for user-installed SDKs
+if [ "$(id -u)" -ne 0 ]; then
+    BUILDER_FLAGS+=("--user")
+fi
+
+# Add install-deps-from if flathub remote exists
+if flatpak remotes --user 2>/dev/null | grep -q flathub || flatpak remotes 2>/dev/null | grep -q flathub; then
+    BUILDER_FLAGS+=("--install-deps-from=flathub")
+fi
+
 echo "==> Building Flatpak application with flatpak-builder..."
 flatpak-builder \
-    --force-clean \
-    --repo="$REPO_DIR" \
-    --install-deps-from=flathub \
-    --default-branch=stable \
+    "${BUILDER_FLAGS[@]}" \
     "$BUILD_DIR" \
     "$FLATPAK_ROOT/${APP_ID}.yaml"
 

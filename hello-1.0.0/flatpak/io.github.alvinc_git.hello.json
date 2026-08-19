@@ -28,8 +28,8 @@
         }
       ],
       "post-install": [
-        "install -Dm644 io.github.alvinc_git.hello.metainfo.xml /app/share/metainfo/io.github.alvinc_git.hello.metainfo.xml",
-        "install -Dm644 io.github.alvinc_git.hello.desktop /app/share/applications/io.github.alvinc_git.hello.desktop"
+        "if [ -f flatpak/io.github.alvinc_git.hello.metainfo.xml ]; then install -Dm644 flatpak/io.github.alvinc_git.hello.metainfo.xml /app/share/metainfo/io.github.alvinc_git.hello.metainfo.xml; elif [ -f io.github.alvinc_git.hello.metainfo.xml ]; then install -Dm644 io.github.alvinc_git.hello.metainfo.xml /app/share/metainfo/io.github.alvinc_git.hello.metainfo.xml; fi",
+        "if [ -f flatpak/io.github.alvinc_git.hello.desktop ]; then install -Dm644 flatpak/io.github.alvinc_git.hello.desktop /app/share/applications/io.github.alvinc_git.hello.desktop; elif [ -f io.github.alvinc_git.hello.desktop ]; then install -Dm644 io.github.alvinc_git.hello.desktop /app/share/applications/io.github.alvinc_git.hello.desktop; fi"
       ]
     }
   ]
