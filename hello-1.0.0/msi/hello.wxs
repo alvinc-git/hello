@@ -10,8 +10,8 @@
     <Package InstallerVersion="200"
              Compressed="yes"
              InstallScope="perMachine"
-             Description="The standard Hello program in C and Rust"
-             Comments="Includes hello and hello-rust command-line executables" />
+             Description="The standard Hello program in C, Rust, and Go"
+             Comments="Includes hello, hello-rust, and hello_go command-line executables" />
 
     <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
     <MediaTemplate EmbedCab="yes" />
@@ -33,6 +33,10 @@
 
       <Component Id="RustExecutable" Guid="6E8F0A1B-3456-789A-BCDE-F0123456789A" Win64="yes">
         <File Id="HelloRustExe" Source="hello-rust.exe" KeyPath="yes" />
+      </Component>
+
+      <Component Id="GoExecutable" Guid="8A0B2C3D-5678-90AB-CDEF-1234567890BC" Win64="yes">
+        <File Id="HelloGoExe" Source="hello_go.exe" KeyPath="yes" />
       </Component>
 
       <Component Id="PathEnvironment" Guid="7F9A1B2C-4567-89AB-CDEF-0123456789AB" Win64="yes">

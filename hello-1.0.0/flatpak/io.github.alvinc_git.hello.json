@@ -4,7 +4,8 @@
   "runtime-version": "24.08",
   "sdk": "org.freedesktop.Sdk",
   "sdk-extensions": [
-    "org.freedesktop.Sdk.Extension.rust-stable"
+    "org.freedesktop.Sdk.Extension.rust-stable",
+    "org.freedesktop.Sdk.Extension.golang"
   ],
   "command": "hello",
   "finish-args": [
@@ -16,9 +17,10 @@
       "name": "hello",
       "buildsystem": "autotools",
       "build-options": {
-        "append-path": "/usr/lib/sdk/rust-stable/bin",
+        "append-path": "/usr/lib/sdk/rust-stable/bin:/usr/lib/sdk/golang/bin",
         "env": {
-          "CARGO_HOME": "/run/build/hello/cargo"
+          "CARGO_HOME": "/run/build/hello/cargo",
+          "GOPATH": "/run/build/hello/gopath"
         }
       },
       "sources": [

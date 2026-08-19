@@ -3,6 +3,6 @@ hello Changelog
 
 1.0.0: (2026-08-13)
   * Initial release of hello (The standard Hello program).
-  * Dual C and pure zero-dependency Rust implementations.
+  * C, pure zero-dependency Rust, and pure zero-dependency Go implementations.
   * Unified build system with GNU Autotools.
-  * Debian and RPM packaging support.
+  * Multi-platform packaging support.

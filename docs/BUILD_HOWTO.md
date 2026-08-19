@@ -9,18 +9,18 @@ This document provides complete instructions for compiling, testing, and packagi
 ### Debian / Ubuntu
 ```bash
 sudo apt-get update
-sudo apt-get install -y build-essential autoconf automake libtool cargo debhelper dpkg-dev fakeroot lintian xz-utils
+sudo apt-get install -y build-essential autoconf automake libtool cargo golang-go debhelper dpkg-dev fakeroot lintian xz-utils
 ```
 
 ### RHEL / Rocky Linux / AlmaLinux / Fedora
 ```bash
 sudo dnf install -y epel-release
-sudo dnf install -y rpm-build gcc make autoconf automake libtool cargo xz
+sudo dnf install -y rpm-build gcc make autoconf automake libtool cargo golang xz
 ```
 
 ### macOS (Homebrew)
 ```bash
-brew install autoconf automake rust
+brew install autoconf automake rust go
 ```
 
 ---
@@ -45,13 +45,22 @@ make
 ./hello
 ./hello --help
 ./hello --version
+
+# Rust binary (if cargo was present)
+./hello-rust/target/release/hello
+
+# Go binary (if go was present)
+./hello-go/hello_go
 ```
 
 If `cargo` is detected during `./configure`, `hello-rust` is compiled automatically as part of `make`.
+If `go` is detected during `./configure`, `hello_go` is compiled automatically as part of `make`.
 
 ---
 
-## 3. Standalone Rust Build
+## 3. Standalone Implementations
+
+### Standalone Rust Build
 
 To build only the zero-dependency Rust implementation:
 
@@ -65,6 +74,23 @@ Or run the automated test script:
 
 ```bash
 cd hello-1.0.0/hello-rust
+./test-build.sh
+```
+
+### Standalone Go Build
+
+To build only the zero-dependency Go implementation:
+
+```bash
+cd hello-1.0.0/hello-go
+go build -ldflags "-X main.programVersion=1.0.0" -o hello_go main.go
+./hello_go
+```
+
+Or run the automated test script:
+
+```bash
+cd hello-1.0.0/hello-go
 ./test-build.sh
 ```
 

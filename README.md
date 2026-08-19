@@ -3,11 +3,12 @@
 ![Version](https://img.shields.io/badge/version-1.0.0-0052CC?style=for-the-badge)
 ![Language C](https://img.shields.io/badge/C-POSIX-00599C?style=for-the-badge&logo=c)
 ![Language Rust](https://img.shields.io/badge/Rust-2021-000000?style=for-the-badge&logo=rust)
+![Language Go](https://img.shields.io/badge/Go-1.18+-00ADD8?style=for-the-badge&logo=go)
 ![License](https://img.shields.io/badge/license-MIT-green?style=for-the-badge)
 ![Debian](https://img.shields.io/badge/Debian-1.0.0--1-A81D33?style=for-the-badge&logo=debian)
 ![RPM](https://img.shields.io/badge/RPM-1.0.0--1-CC0000?style=for-the-badge&logo=redhat)
 
-`hello` is the standard Hello program, featuring dual C and Rust implementations, unified autotools build support, and complete Debian (`.deb`) and RPM (`.rpm`) packaging.
+`hello` is the standard Hello program, featuring C, Rust, and Go implementations, unified autotools build support, and complete multi-platform packaging.
 
 ---
 
@@ -15,6 +16,7 @@
 
 - **C Implementation (`hello`)**: Lightweight C99 / POSIX implementation.
 - **Rust Implementation (`hello-rust`)**: Zero-dependency pure Rust standard library implementation.
+- **Go Implementation (`hello_go`)**: Zero-dependency pure Go standard library implementation.
 - **Build System**: Unified GNU Autotools (`autoconf` + `automake`).
 - **Packaging Parity**: Automated packaging across Debian (`.deb`), RPM (`.rpm`), Flatpak (`.flatpak`), AppImage (`.AppImage`), Snap (`.snap`), Windows MSI (`.msi`), and macOS Homebrew with man pages.
 - **Continuous Integration**: GitHub Actions automated build, test, and release workflows.
@@ -52,9 +54,15 @@ hello/
 │   │   │   └── main.rs        # Rust implementation
 │   │   ├── README.md          # Rust implementation docs
 │   │   └── test-build.sh      # Standalone build test script
+│   ├── hello-go/              # Go implementation
+│   │   ├── go.mod             # Go module definition
+│   │   ├── main.go            # Go implementation
+│   │   ├── README.md          # Go implementation docs
+│   │   └── test-build.sh      # Standalone build test script
 │   ├── man/
 │   │   ├── hello.1            # Manual page for C program
-│   │   └── hello-rust.1       # Manual page for Rust program
+│   │   ├── hello-rust.1       # Manual page for Rust program
+│   │   └── hello_go.1         # Manual page for Go program
 │   ├── debian/                # Debian packaging definitions (3.0 quilt)
 │   │   ├── changelog
 │   │   ├── control
@@ -93,7 +101,7 @@ hello/
 
 ## Building from Source
 
-### Unified Build (C & Rust)
+### Unified Build (C, Rust & Go)
 ```bash
 cd hello-1.0.0
 ./autogen.sh
@@ -104,11 +112,18 @@ make
 This builds:
 - `hello` (C executable)
 - `hello-rust` (Rust executable, when `cargo` is present)
+- `hello_go` (Go executable, when `go` is present)
 
 ### Standalone Rust Build
 ```bash
 cd hello-1.0.0/hello-rust
 cargo build --release
+```
+
+### Standalone Go Build
+```bash
+cd hello-1.0.0/hello-go
+go build -ldflags "-X main.programVersion=1.0.0" -o hello_go main.go
 ```
 
 ---
@@ -125,6 +140,9 @@ cargo build --release
 
 # Run the Rust implementation
 ./hello-1.0.0/hello-rust/target/release/hello
+
+# Run the Go implementation
+./hello-1.0.0/hello-go/hello_go
 ```
 
 ---

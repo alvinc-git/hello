@@ -111,6 +111,25 @@ AS_IF([test "x$enable_rust" != "xno"], [
 
 AM_CONDITIONAL([HAVE_CARGO], [test "x$CARGO" != "xno"])
 
+# ==========
+# Go Program
+# ==========
+AC_ARG_ENABLE([go],
+  [AS_HELP_STRING([--disable-go],[do not build the Go program])],
+  [enable_go=$enableval],
+  [enable_go=auto])
+
+AS_IF([test "x$enable_go" != "xno"], [
+  AC_PATH_PROG([GO], [go], [no])
+  AS_IF([test "x$enable_go" = "xyes" && test "x$GO" = "xno"], [
+    AC_MSG_ERROR([--enable-go requested but go was not found])
+  ])
+], [
+  GO="no"
+])
+
+AM_CONDITIONAL([HAVE_GO], [test "x$GO" != "xno"])
+
 # ==============
 # Setup config.h
 # ==============
@@ -136,6 +155,7 @@ Build configuration:
         werror:             ${enable_werror}
         hardening:          ${enable_hardening}
         rust program:       ${CARGO}
+        go program:         ${GO}
         STRICT_CFLAGS:      ${STRICT_CFLAGS}
         HARDEN_CFLAGS:      ${HARDEN_CFLAGS}
         HARDEN_LDFLAGS:     ${HARDEN_LDFLAGS}

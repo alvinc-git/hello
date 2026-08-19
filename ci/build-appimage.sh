@@ -48,6 +48,9 @@ cp "$SRC/hello" "$APPDIR/usr/bin/hello"
 if [ -f "$SRC/hello-rust/target/release/hello" ]; then
     cp "$SRC/hello-rust/target/release/hello" "$APPDIR/usr/bin/hello-rust"
 fi
+if [ -f "$SRC/hello-go/hello_go" ]; then
+    cp "$SRC/hello-go/hello_go" "$APPDIR/usr/bin/hello_go"
+fi
 
 # Install man pages
 if [ -f "$SRC/man/hello.1" ]; then
@@ -55,6 +58,9 @@ if [ -f "$SRC/man/hello.1" ]; then
 fi
 if [ -f "$SRC/man/hello-rust.1" ]; then
     cp "$SRC/man/hello-rust.1" "$APPDIR/usr/share/man/man1/"
+fi
+if [ -f "$SRC/man/hello_go.1" ]; then
+    cp "$SRC/man/hello_go.1" "$APPDIR/usr/share/man/man1/"
 fi
 
 # Install AppImage metadata and entrypoint

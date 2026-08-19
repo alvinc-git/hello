@@ -17,6 +17,9 @@ override_dh_auto_build:
 			(cd hello-rust && cargo build --release); \
 		fi; \
 	fi
+	if command -v go >/dev/null 2>&1 && [ -d hello-go ]; then \
+		(cd hello-go && go build -ldflags "-X main.programVersion=$(DEB_VERSION_UPSTREAM)" -o hello_go main.go); \
+	fi
 
 override_dh_auto_install:
 	dh_auto_install
@@ -24,4 +27,7 @@ override_dh_auto_install:
 		install -D -m 755 hello-rust/target/$(DEB_HOST_RUST_TYPE)/release/hello debian/hello/usr/bin/hello-rust; \
 	elif [ -f hello-rust/target/release/hello ]; then \
 		install -D -m 755 hello-rust/target/release/hello debian/hello/usr/bin/hello-rust; \
+	fi
+	if [ -f hello-go/hello_go ]; then \
+		install -D -m 755 hello-go/hello_go debian/hello/usr/bin/hello_go; \
 	fi

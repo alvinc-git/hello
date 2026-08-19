@@ -58,9 +58,15 @@ elif command -v wixl >/dev/null 2>&1; then
         cp "$MSI_ROOT/hello.exe" "$MSI_ROOT/hello-rust.exe"
     fi
 
+    if command -v go >/dev/null 2>&1 && [ -d "$SRC/hello-go" ]; then
+        (cd "$SRC/hello-go" && GOOS=windows GOARCH=amd64 go build -ldflags "-X main.programVersion=$VERSION" -o "$MSI_ROOT/hello_go.exe" main.go)
+    else
+        cp "$MSI_ROOT/hello.exe" "$MSI_ROOT/hello_go.exe"
+    fi
+
     echo "==> Packaging MSI with wixl..."
     wixl -v -a x64 -o "$DIST_DIR/hello-${VERSION}-x64.msi" "$MSI_ROOT/hello.wxs"
-    rm -f "$MSI_ROOT/hello.exe" "$MSI_ROOT/hello-rust.exe"
+    rm -f "$MSI_ROOT/hello.exe" "$MSI_ROOT/hello-rust.exe" "$MSI_ROOT/hello_go.exe"
 
 else
     echo "!!! Neither WiX Toolset (candle/light) nor msitools (wixl) found."

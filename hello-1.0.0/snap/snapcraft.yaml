@@ -1,9 +1,9 @@
 name: hello
 version: '1.0.0'
-summary: Standard Hello program in C and Rust
+summary: Standard Hello program in C, Rust, and Go
 description: |
-  hello is the standard Hello program, featuring both a lightweight C99
-  implementation and a zero-dependency pure Rust implementation.
+  hello is the standard Hello program, featuring lightweight C99,
+  zero-dependency pure Rust, and Go implementations.
 
 grade: stable
 confinement: strict
@@ -14,6 +14,8 @@ apps:
     command: usr/bin/hello
   hello-rust:
     command: usr/bin/hello-rust
+  hello_go:
+    command: usr/bin/hello_go
 
 parts:
   hello:
@@ -27,4 +29,5 @@ parts:
       - autoconf
       - automake
       - cargo
+      - golang-go
     stage-packages: []

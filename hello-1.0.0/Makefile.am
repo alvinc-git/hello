@@ -20,14 +20,19 @@ EXTRA_DIST = \
 	hello-rust/Cargo.toml \
 	hello-rust/README.md \
 	hello-rust/src/main.rs \
-	hello-rust/test-build.sh
+	hello-rust/test-build.sh \
+	hello-go/go.mod \
+	hello-go/README.md \
+	hello-go/main.go \
+	hello-go/test-build.sh
 
 # Man pages live upstream rather than in debian/ so they exist for any
 # packaging format, and are picked up automatically by dh_installman via
 # `make install`.  The dist_ prefix puts them in the release tarball.
 dist_man_MANS = \
 	man/hello.1 \
-	man/hello-rust.1
+	man/hello-rust.1 \
+	man/hello_go.1
 
 bin_PROGRAMS = hello
 hello_SOURCES = \
@@ -38,18 +43,36 @@ hello_CFLAGS = \
 hello_LDFLAGS = \
 	$(AM_LDFLAGS)
 
+EXTRA_PROGRAM_TARGETS =
 if HAVE_CARGO
-all-local: hello-rust-build
+EXTRA_PROGRAM_TARGETS += hello-rust-build
+endif
+if HAVE_GO
+EXTRA_PROGRAM_TARGETS += hello-go-build
+endif
+
+all-local: $(EXTRA_PROGRAM_TARGETS)
 
 hello-rust-build:
 	cd $(srcdir)/hello-rust && cargo build --release
+
+hello-go-build:
+	cd $(srcdir)/hello-go && go build -ldflags "-X main.programVersion=$(PACKAGE_VERSION)" -o hello_go main.go
 
 install-exec-hook:
 	if [ -f $(srcdir)/hello-rust/target/release/hello ]; then \
 		$(MKDIR_P) $(DESTDIR)$(bindir) && \
 		$(INSTALL_PROGRAM) $(srcdir)/hello-rust/target/release/hello $(DESTDIR)$(bindir)/hello-rust; \
 	fi
+	if [ -f $(srcdir)/hello-go/hello_go ]; then \
+		$(MKDIR_P) $(DESTDIR)$(bindir) && \
+		$(INSTALL_PROGRAM) $(srcdir)/hello-go/hello_go $(DESTDIR)$(bindir)/hello_go; \
+	fi
 
 clean-local:
-	cd $(srcdir)/hello-rust && cargo clean 2>/dev/null || true
-endif
+	if [ -d $(srcdir)/hello-rust ]; then \
+		(cd $(srcdir)/hello-rust && cargo clean 2>/dev/null || true); \
+	fi
+	if [ -f $(srcdir)/hello-go/hello_go ]; then \
+		rm -f $(srcdir)/hello-go/hello_go; \
+	fi

@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-`hello` is the standard Hello program, featuring dual C and Rust implementations with Debian and RPM packaging.
+`hello` is the standard Hello program, featuring C, Rust, and Go implementations with comprehensive multi-platform packaging (Debian, RPM, Flatpak, AppImage, Snap, Windows MSI, macOS Homebrew).
 
 ## Repository layout
 
@@ -21,7 +21,7 @@ cd hello-1.0.0
 make
 ```
 
-Produces binaries: `hello` (C program) and `hello-rust` (zero-dependency Rust program, when `cargo` is present).
+Produces binaries: `hello` (C program), `hello-rust` (zero-dependency Rust program, when `cargo` is present), and `hello_go` (zero-dependency Go program, when `go` is present).
 
 `configure` prints a summary of what it resolved. Relevant options:
 
@@ -31,6 +31,7 @@ Produces binaries: `hello` (C program) and `hello-rust` (zero-dependency Rust pr
 | `--enable-werror` | off | Adds `-Werror` |
 | `--disable-hardening` | hardening on | Drops `-fstack-protector-strong`, `-D_FORTIFY_SOURCE=2`, `-Wl,-z,relro`, `-Wl,-z,now` |
 | `--disable-rust` | auto | Skips building the Rust program |
+| `--disable-go` | auto | Skips building the Go program |
 
 **The tree builds with zero warnings under the default flags. Keep it that way** — a new warning is a regression, not background noise.
 
@@ -44,11 +45,14 @@ Careful when checking for warnings: a bare second `make` is a no-op and will rep
 ./hello               # Prints "Hello, World!"
 ./hello --help        # Prints usage
 ./hello --version     # Prints version
+
+./hello-rust/target/release/hello  # Rust program
+./hello-go/hello_go                # Go program
 ```
 
 ## Packaging (Debian, RPM, Flatpak, AppImage, Snap, MSI & Homebrew)
 
-Multiple packaging frameworks package `hello` (C) and `hello-rust` (Rust) together:
+Multiple packaging frameworks package `hello` (C), `hello-rust` (Rust), and `hello_go` (Go) together:
 
 - **Debian packaging:** `hello-1.0.0/debian/` (build script: `./ci/build.sh`)
 - **RPM packaging:** `hello-1.0.0/rpm/` (build script: `./ci/build-rpm.sh`)
