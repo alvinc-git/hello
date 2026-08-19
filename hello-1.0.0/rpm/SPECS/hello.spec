@@ -5,7 +5,7 @@
 Name:           hello
 Version:        1.0.0
 Release:        1%{?dist}
-Summary:        The standard Hello program
+Summary:        Standard Hello program
 
 License:        MIT
 URL:            https://github.com/alvinc-git/hello

@@ -10,6 +10,6 @@ Vcs-Git: https://github.com/alvinc-git/hello.git
 Package: hello
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: The standard Hello program
+Description: standard Hello program
  A standard Hello World program. Includes both C and
  Rust implementations (hello and hello-rust).
