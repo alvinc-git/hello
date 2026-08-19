@@ -23,6 +23,12 @@ mkdir -p "$DIST_DIR"
 # Generate distribution tarball if needed
 cd "$SRC"
 if [ ! -f "Makefile" ]; then
+    if ! command -v autoreconf >/dev/null 2>&1; then
+        if command -v brew >/dev/null 2>&1; then
+            echo "==> Installing autotools via Homebrew..."
+            brew install autoconf automake libtool || true
+        fi
+    fi
     echo "==> Bootstrapping autotools"
     ./autogen.sh
     ./configure
