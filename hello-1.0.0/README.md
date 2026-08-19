@@ -12,7 +12,7 @@
 - **C Implementation (`hello`)**: Clean, lightweight C99 / POSIX implementation.
 - **Rust Implementation (`hello-rust`)**: Zero-dependency Rust implementation using only `std`.
 - **GNU Autotools Build System**: Supports standard `./autogen.sh && ./configure && make`.
-- **Distribution Packages**: Complete packaging for both Debian (`.deb`) and RPM (`.rpm`).
+- **Packaging Co-location**: Co-located Debian (`debian/`) and RPM (`rpm/`) packaging trees for version-isolated packaging evolution.
 
 ## Building
 
@@ -28,3 +28,8 @@ make
 ./hello
 ./hello-rust/target/release/hello
 ```
+
+## Packaging
+
+- **Debian:** Definitions located in `debian/`
+- **RPM:** Definitions located in `rpm/`
