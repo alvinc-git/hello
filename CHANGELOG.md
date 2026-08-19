@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Snap Packaging**: Added Snapcraft packaging definitions (`hello-1.0.0/snap/`), manifest `snapcraft.yaml`, automated build script (`ci/build-snap.sh`).
 - **Windows MSI Packaging**: Added WiX Toolset installer definitions (`hello-1.0.0/msi/hello.wxs`), cross-compilation support via `wixl`/MinGW, automated build script (`ci/build-msi.sh`), and GitHub Actions workflow job.
 - **macOS Homebrew Formula**: Added Homebrew formula specification (`hello-1.0.0/homebrew/Formula/hello.rb`), automated checksum verification script (`ci/build-homebrew.sh`), and GitHub Actions workflow job.
+- **ARM64 Debian Support**: Added multi-architecture `arm64` Debian build matrix with QEMU integration, cross-compilation rules in `debian/rules`, and `DEB_HOST_ARCH` support in `ci/build.sh`.
 
 ## [1.0.0] - 2026-08-18
 

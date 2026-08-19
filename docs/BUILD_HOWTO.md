@@ -72,14 +72,19 @@ cd hello-1.0.0/hello-rust
 
 ## 4. Debian Packaging (`.deb`)
 
-To build the Debian package and run Lintian quality checks:
+To build the Debian package and run Lintian quality checks (supporting both `amd64` and `arm64`):
 
 ```bash
 ./ci/build.sh
 ```
 
+To cross-build for a specific host architecture:
+```bash
+DEB_HOST_ARCH=arm64 ./ci/build.sh
+```
+
 Package artifacts land in `build/dist/`:
-- `hello_1.0.0-1_<arch>.deb`
+- `hello_1.0.0-1_amd64.deb` / `hello_1.0.0-1_arm64.deb`
 - `hello_1.0.0-1.dsc`
 - `hello_1.0.0-1.debian.tar.xz`
 - `hello_1.0.0.orig.tar.xz`

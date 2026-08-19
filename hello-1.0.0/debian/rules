@@ -3,17 +3,25 @@
 # output every command that modifies files on the build system.
 #export DH_VERBOSE = 1
 
+-include /usr/share/dpkg/architecture.mk
+
 %:
 	dh $@
 
 override_dh_auto_build:
 	dh_auto_build
 	if command -v cargo >/dev/null 2>&1 && [ -d hello-rust ]; then \
-		(cd hello-rust && cargo build --release); \
+		if [ -n "$(DEB_HOST_RUST_TYPE)" ] && [ "$(DEB_HOST_ARCH)" != "$(DEB_BUILD_ARCH)" ]; then \
+			(cd hello-rust && cargo build --release --target $(DEB_HOST_RUST_TYPE)); \
+		else \
+			(cd hello-rust && cargo build --release); \
+		fi; \
 	fi
 
 override_dh_auto_install:
 	dh_auto_install
-	if [ -f hello-rust/target/release/hello ]; then \
+	if [ -n "$(DEB_HOST_RUST_TYPE)" ] && [ -f hello-rust/target/$(DEB_HOST_RUST_TYPE)/release/hello ]; then \
+		install -D -m 755 hello-rust/target/$(DEB_HOST_RUST_TYPE)/release/hello debian/hello/usr/bin/hello-rust; \
+	elif [ -f hello-rust/target/release/hello ]; then \
 		install -D -m 755 hello-rust/target/release/hello debian/hello/usr/bin/hello-rust; \
 	fi

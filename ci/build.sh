@@ -66,7 +66,11 @@ cp -r "$SRC/debian" hello-1.0.0/debian
 
 echo "==> Building binary and source packages"
 cd hello-1.0.0
-dpkg-buildpackage -us -uc
+DPKG_OPTS=("-us" "-uc")
+if [ -n "${DEB_HOST_ARCH:-}" ]; then
+    DPKG_OPTS+=("-a${DEB_HOST_ARCH}")
+fi
+dpkg-buildpackage "${DPKG_OPTS[@]}"
 
 echo "==> Linting"
 cd "$BUILD"
@@ -98,6 +102,9 @@ echo "==> Artifacts in build/dist:"
 ls -1sh
 echo
 echo "==> Package information:"
-if ls ./hello_*_*.deb 1>/dev/null 2>&1; then
-    dpkg-deb -f ./hello_*_*.deb Package Version Architecture Depends || true
-fi
+for deb in ./hello_*_*.deb; do
+    if [ -f "$deb" ]; then
+        echo "--- $(basename "$deb") ---"
+        dpkg-deb -f "$deb" Package Version Architecture Depends || true
+    fi
+done

@@ -135,7 +135,7 @@ cargo build --release
 ```bash
 ./ci/build.sh
 ```
-Build outputs land in `build/dist/` (including `.deb`, `.dsc`, `.tar.xz`, and `SHA256SUMS`).
+Builds native and multi-arch Debian packages (supporting `amd64` and `arm64`). Build outputs land in `build/dist/` (including `.deb`, `.dsc`, `.tar.xz`, and `SHA256SUMS`).
 
 ### RPM Package (`.rpm`)
 ```bash
