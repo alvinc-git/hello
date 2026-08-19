@@ -1,4 +1,8 @@
+hello Changelog
+===============
 
-This file describes the changes to skysecd.  The base version is 1.5.0.
-
-0.5.0: (work in progress)
+1.0.0: (2026-08-13)
+  * Initial release of hello (The standard Hello program).
+  * Dual C and pure zero-dependency Rust implementations.
+  * Unified build system with GNU Autotools.
+  * Debian and RPM packaging support.

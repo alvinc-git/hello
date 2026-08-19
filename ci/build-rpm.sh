@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Build RPM package for hello
-# This script follows the same approach as the Debian build but for RPM
+# This script builds the RPM package for hello
 
 set -euo pipefail
 
@@ -15,13 +15,11 @@ echo "Building RPM package for hello version 1.0.0..."
 cd "$SRC"
 
 # Ensure Makefile exists by running autogen and configure if needed.
-# --disable-static-daemon is used here solely so `make dist` can package
-# the source tarball regardless of whether glibc-static is installed on the host.
 if [ ! -f "Makefile" ]; then
     echo "==> Bootstrapping autotools"
     ./autogen.sh
     echo "==> Configuring"
-    ./configure --disable-static-daemon
+    ./configure
 fi
 
 # Clean previous builds
@@ -33,7 +31,7 @@ make dist
 
 # Copy tarball to RPM SOURCES directory
 echo "Copying source tarball to RPM SOURCES..."
-mkdir -p "$REPO_ROOT/rpm/SOURCES"
+mkdir -p "$REPO_ROOT/rpm/SOURCES" "$REPO_ROOT/rpm/BUILD" "$REPO_ROOT/rpm/RPMS" "$REPO_ROOT/rpm/SRPMS"
 cp hello-1.0.0.tar.xz "$REPO_ROOT/rpm/SOURCES/"
 
 # Build the RPM package

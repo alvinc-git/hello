@@ -1,13 +1,6 @@
-skydsecd (2.0.0-1) stable; urgency=medium
+hello (1.0.0-1) stable; urgency=medium
 
-  * Release version 2.0.0 with dual C and Rust client architecture.
+  * Initial release of hello (The standard Hello program).
+  * Includes dual C and Rust implementations.
 
- -- Alvin Cura <alvin.cura@skydio.com>  Thu, 13 Aug 2026 17:55:00 -0700
-
-skydsecd (1.5.0-1) stable; urgency=medium
-
-  * Release version 1.5.0 with Rust client implementation.
-
- -- Alvin Cura <alvin.cura@skydio.com>  Thu, 13 Aug 2026 13:50:00 -0700
-
-
+ -- Alvin Cura <alvinc@sysdudez.com>  Thu, 13 Aug 2026 17:55:00 -0700

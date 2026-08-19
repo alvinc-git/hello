@@ -1,60 +1,37 @@
-# Code Review Report: hello (Version 1.0.0)
+# Code Review Report: hello 1.0.0
 
-## Executive Summary
-
-The `hello` codebase (Version 1.0.0) represents an enterprise-grade, dual C and Rust security and compliance daemon and client architecture. It builds cleanly with zero compiler warnings across both C (`gcc`) and Rust (`rustc`) toolchains, maintains all strict security invariants, and provides unified packaging for both **Debian (`.deb`)** and **RPM (`.rpm`)** distributions.
-
----
-
-## Code Quality & Security Assessment
-
-### 1. Security by Design & Static Linking
-- **Static Daemon Guarantee (`hello` & `hello-rust`):** Both C and Rust server daemons are statically linked (`-static` and `-C target-feature=+crt-static -C relocation-model=static`) and stripped (`strip = true`). This prevents shared library substitution attacks on root-level compliance checkers.
-- **No NSS Symbol Pollution:** Neither implementation uses `getpwuid()`, `getgrgid()`, or NSS functions that trigger runtime `dlopen()` dependencies. Raw `st_uid`/`st_gid` comparisons against `NOBODY_ID` (65534) preserve true static independence.
-
-### 2. Dual C & Zero-Dependency Rust Implementations
-- **C Implementation (`src/hello.c`):** Clean C99 + POSIX:2008 code compiled with strict warning flags (`-Wall -pedantic -Wextra -Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition -Wshadow -Wconversion -fstack-protector-strong -D_FORTIFY_SOURCE=2`).
-- **Rust Implementation (`hello-rust/`):** Pure Rust 2021 standard library implementation with **zero external dependencies** (`Cargo.toml` has no `[dependencies]`).
-  - `hello` (Rust client): Fast, memory-safe TCP client using `std::net::TcpStream`.
-  - `hello` (Rust daemon): Multithreaded TCP daemon using standard POSIX `fork`, `setsid`, `gethostname`, `ctime`, and `signal` system calls.
-  - Size/Stripping Optimization: Optimized release profile (`opt-level = "z"`, `lto = true`, `panic = "abort"`, `codegen-units = 1`, `strip = true`).
-
-### 3. Fresh Facts Probing & Robust Control Flow
-- **Probing per Connection:** Host fact gathering (`gethostname`, baseboard serial `/sys/class/dmi/id/board_serial`, Workspace ONE Hub utility `/opt/vmware/ws1-hub/bin/ws1HubUtil`, and `ctime`) is executed inside the `accept()` loop per connection, ensuring zero state caching.
-- **No `exit()` in Serve Loops:** Failures within accepted client connections are handled gracefully without terminating the main daemon process.
+**Review Date:** 2026-08-18  
+**Repository:** `alvinc-git/hello`  
+**Target Version:** 1.0.0  
 
 ---
 
-## Packaging Infrastructure Assessment
+## 1. Executive Summary
 
-### Debian Packaging (`./ci/build.sh`)
-- Automated build pipeline (`dpkg-buildpackage`) producing `hello_1.0.0-1_amd64.deb`.
-- Includes man pages for all binaries (`hello.1`, `hello-rust.1`, `hello.8`, `hello-rust.8`).
-- Lintian verification passes with zero unexpected findings (`statically-linked-binary` overrides correctly registered for `usr/sbin/hello` and `usr/sbin/hello-rust`).
-
-### RPM Packaging (`./ci/build-rpm.sh`)
-- Full RPM spec scaffolding (`rpm/SPECS/hello.spec`) mirroring the Debian release model.
-- Automatically compiles C and Rust binaries and packages `hello`, `hello-rust`, `hello`, `hello-rust`, and the systemd unit file (`hello.service`).
+A comprehensive cleanup and review of the repository was completed to eliminate all legacy artifacts, stale stubs, and inaccuracies inherited from the original template repository. The project has been fully transitioned to `hello` 1.0.0, supporting dual C and Rust implementations, unified Autotools build management, full Debian and RPM packaging parity, and GitHub Actions CI/CD workflows.
 
 ---
 
-## Invariant Compliance Checklist
+## 2. Review Checklist & Findings
 
-The codebase strictly satisfies all repository invariants defined in `AGENTS.md` and `CLAUDE.md`:
+### A. Source Code & Headers
+- [x] **C Implementation (`hello-1.0.0/src/hello.c`)**: Clean C99/POSIX implementation. Typographical errors corrected. Supports standard `-h`/`--help` and `-v`/`-V`/`--version` flags.
+- [x] **Config Header (`hello-1.0.0/src/config.h`)**: Purged obsolete daemon/client comments and macros. Updated program definitions.
+- [x] **Rust Implementation (`hello-1.0.0/hello-rust/src/main.rs`)**: Cleaned unused imports and constants. Implemented argument parity with C program. Zero external dependencies.
 
-| Invariant | Status | Verification Details |
-|---|---|---|
-| **Host facts probed per connection** | ✅ PASS | `gather_facts` called per `accept()` loop in both C and Rust daemons |
-| **Static linking for daemons** | ✅ PASS | `hello` (C) and `hello-rust` (Rust) are statically linked `ET_EXEC` binaries |
-| **No NSS symbols** | ✅ PASS | No `getpwuid`/`getgrgid` calls; raw `st_uid`/`st_gid` compared to `65534` |
-| **Zero external Rust dependencies** | ✅ PASS | `Cargo.toml` contains no third-party crates |
-| **Zero compiler warnings** | ✅ PASS | Compiles cleanly under default `-Wall` / `-Werror` and Rust compiler rules |
-| **systemd unit generated by make** | ✅ PASS | `src/daemon/hello.service` generated from `.in` template with proper `$(sbindir)` expansion |
-| **Debian & RPM packaging parity** | ✅ PASS | `./ci/build.sh` and `./ci/build-rpm.sh` package all C and Rust binaries |
-| **Signed commits & co-authorship** | ✅ PASS | All commits signed (`git commit -S`); trailers include `Co-Authored-By:` with model details |
+### B. Build System & Autotools
+- [x] **Autoconf (`hello-1.0.0/configure.ac`)**: Removed all obsolete daemon/systemd checks. Properly probes compiler flags, hardening options, and Cargo availability.
+- [x] **Automake (`hello-1.0.0/Makefile.am`)**: Targets clean binaries (`hello` and `hello-rust`), distributes man pages, and integrates Cargo build lifecycle hooks without errors.
+- [x] **Zero-Warning Guarantee**: Clean compilation across all targets.
 
----
+### C. Manual Pages
+- [x] Replaced legacy daemon/service man pages (`skydsec.1`, `skydsec-rust.1`, `skydsecd.8`, `skydsecd-rust.8`) with `man/hello.1` and `man/hello-rust.1`.
 
-## Conclusion
+### D. Packaging Parity (Debian & RPM)
+- [x] **Debian (`hello-1.0.0/debian/`)**: Package definitions (`control`, `rules`, `changelog`, `copyright`) updated for `hello` 1.0.0 under MIT license. Obsolete override files purged.
+- [x] **RPM (`rpm/SPECS/hello.spec`)**: Cleaned spec file, resolved duplicate subpackage definitions, and verified file manifests.
+- [x] **Build Scripts (`ci/build.sh`, `ci/build-rpm.sh`)**: Updated to produce clean, reproducible `.deb` and `.rpm` artifacts.
 
-**Version 1.0.0 of `hello` is a secure, highly performant, and production-ready release.** The addition of the zero-dependency Rust client and daemon alongside the existing C implementation provides dual-language flexibility, memory safety, and cross-platform packaging readiness while preserving all core security guarantees.
+### E. CI/CD & Repository Management
+- [x] **GitHub Actions (`.github/workflows/ci.yml`)**: Fully replaced Bitbucket pipelines with GitHub Actions matrix jobs for Debian and RPM package validation and release automation.
+- [x] **Publishing (`ci/publish.sh`)**: Updated to target GitHub Releases.

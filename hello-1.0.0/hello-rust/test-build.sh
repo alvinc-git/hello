@@ -1,6 +1,8 @@
 #!/bin/bash
 
-# Test script to verify the Rust implementations build correctly
+# Test script to verify the Rust implementation builds correctly
+
+set -euo pipefail
 
 echo "Testing Rust hello build..."
 
@@ -12,18 +14,18 @@ if [ ! -f "Cargo.toml" ]; then
     exit 1
 fi
 
-echo "Building release binaries..."
+echo "Building release binary..."
 cargo build --release
 
-if [ $? -eq 0 ]; then
+if [ -f "target/release/hello" ]; then
     echo "✅ Build successful!"
-    echo "Binary locations:"
-    echo "  Program: target/release/hello"
-
+    echo "Binary location: target/release/hello"
     echo ""
-    echo "Client version info:"
+    echo "Program output:"
+    ./target/release/hello
+    echo ""
+    echo "Program version info:"
     ./target/release/hello --version
-
 else
     echo "❌ Build failed!"
     exit 1

@@ -1,16 +1,15 @@
-Source: skydsecd
-Section: net
+Source: hello
+Section: utils
 Priority: optional
-Maintainer: Alvin Cura <alvin.cura@skydio.com>
+Maintainer: Alvin Cura <alvinc@sysdudez.com>
 Build-Depends: debhelper-compat (= 12), cargo
-Standards-Version: 4.4.1
-Homepage: https://bitbucket.org/alvincura/skydsecd
-Vcs-Git: https://bitbucket.org/alvincura/skydsecd.git
+Standards-Version: 4.6.2
+Homepage: https://github.com/alvinc-git/hello
+Vcs-Git: https://github.com/alvinc-git/hello.git
 
-Package: skydsecd
+Package: hello
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: Skydio Security and IT Management Monitor
- A service to monitor system services for Skydio Security
- compliance and Skydio IT systems management. Includes both C
- and Rust client implementations (skydsec and skydsec-rust).
+Description: The standard Hello program
+ A standard Hello World program. Includes both C and
+ Rust implementations (hello and hello-rust).

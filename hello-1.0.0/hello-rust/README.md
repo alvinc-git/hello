@@ -3,31 +3,32 @@
 ![Language Rust](https://img.shields.io/badge/Rust-2021-000000?style=for-the-badge&logo=rust)
 ![Dependencies](https://img.shields.io/badge/dependencies-zero-success?style=for-the-badge)
 
-This directory contains pure Rust implementations of both the `hello` with zero external dependencies.
+This directory contains the pure Rust implementation of `hello` with zero external dependencies.
 
 ## Features
 
-- **`hello` Program**: Main program
-- **Zero Dependencies**: Built using standard library `std` networking and POSIX system calls.
-- **Security Guarantees**: Statically linked and stripped daemon, no NSS symbol dependencies, raw UID/GID checks (`NOBODY_ID`).
+- **`hello` Program**: Main program printing "Hello, World!"
+- **Zero Dependencies**: Built using only the Rust standard library (`std`).
+- **Standard Options**: Supports `-h` / `--help` and `-v` / `--version`.
 
 ## Usage
 
-### Program:
 ```bash
+# Run hello
 hello
-```
 
+# Show help
+hello --help
+
+# Show version
+hello --version
+```
 
 ## Building
 
 ```bash
-# Build client dynamically
-cargo build --release --bin hello
-
-# Build daemon statically
-RUSTFLAGS="-C target-feature=+crt-static -C relocation-model=static" cargo build --release --bin hello
+cargo build --release
 ```
 
-The binaries will be created at:
+The compiled binary will be located at:
 - `target/release/hello`
