@@ -31,3 +31,6 @@ override_dh_auto_install:
 	if [ -f hello-go/hello_go ]; then \
 		install -D -m 755 hello-go/hello_go debian/hello/usr/bin/hello_go; \
 	fi
+
+override_dh_dwz:
+	# Skip dh_dwz as Go and Rust binaries contain compressed or unsupported DWARF debug sections
