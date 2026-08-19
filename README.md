@@ -16,7 +16,7 @@
 - **C Implementation (`hello`)**: Lightweight C99 / POSIX implementation.
 - **Rust Implementation (`hello-rust`)**: Zero-dependency pure Rust standard library implementation.
 - **Build System**: Unified GNU Autotools (`autoconf` + `automake`).
-- **Packaging Parity**: Automated Debian, RPM, Flatpak, and AppImage packaging with man pages.
+- **Packaging Parity**: Automated packaging across Debian (`.deb`), RPM (`.rpm`), Flatpak (`.flatpak`), AppImage (`.AppImage`), Snap (`.snap`), Windows MSI (`.msi`), and macOS Homebrew with man pages.
 - **Continuous Integration**: GitHub Actions automated build, test, and release workflows.
 
 ---
@@ -33,6 +33,9 @@ hello/
 │   ├── build-rpm.sh           # RPM packaging automation script
 │   ├── build-flatpak.sh       # Flatpak packaging automation script
 │   ├── build-appimage.sh      # AppImage packaging automation script
+│   ├── build-snap.sh          # Snap packaging automation script
+│   ├── build-msi.sh           # Windows MSI packaging automation script
+│   ├── build-homebrew.sh      # macOS Homebrew verification script
 │   └── publish.sh             # GitHub Releases publishing script
 ├── docs/
 │   └── BUILD_HOWTO.md         # Detailed build and packaging guide
@@ -68,11 +71,22 @@ hello/
 │   │   ├── io.github.alvinc_git.hello.json
 │   │   ├── io.github.alvinc_git.hello.metainfo.xml
 │   │   └── io.github.alvinc_git.hello.desktop
-│   └── appimage/              # AppImage packaging definitions
+│   ├── appimage/              # AppImage packaging definitions
+│   │   ├── README.md
+│   │   ├── AppRun
+│   │   ├── hello.desktop
+│   │   └── hello.svg
+│   ├── snap/                  # Snap packaging definitions
+│   │   ├── README.md
+│   │   └── snapcraft.yaml
+│   ├── msi/                   # Windows MSI packaging definitions
+│   │   ├── README.md
+│   │   └── hello.wxs
+│   └── homebrew/              # macOS Homebrew packaging definitions
 │       ├── README.md
-│       ├── AppRun
-│       ├── hello.desktop
-│       └── hello.svg
+│       ├── hello.rb
+│       └── Formula/
+│           └── hello.rb
 ```
 
 ---
@@ -140,6 +154,24 @@ Build outputs land in `hello-1.0.0/flatpak/dist/` (e.g. `io.github.alvinc_git.he
 ./ci/build-appimage.sh
 ```
 Build outputs land in `hello-1.0.0/appimage/dist/` (e.g. `hello-1.0.0-x86_64.AppImage`).
+
+### Snap Package (`.snap`)
+```bash
+./ci/build-snap.sh
+```
+Build outputs land in `hello-1.0.0/snap/dist/` (e.g. `hello_1.0.0_amd64.snap`).
+
+### Windows MSI Package (`.msi`)
+```bash
+./ci/build-msi.sh
+```
+Build outputs land in `hello-1.0.0/msi/dist/` (e.g. `hello-1.0.0-x64.msi`).
+
+### macOS Homebrew Formula
+```bash
+./ci/build-homebrew.sh
+```
+Formula artifact lands in `hello-1.0.0/homebrew/dist/hello.rb`.
 
 ---
 

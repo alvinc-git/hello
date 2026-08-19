@@ -131,10 +131,57 @@ jobs:
           path: hello-1.0.0/appimage/dist/*.AppImage
           if-no-files-found: error
 
+  msi-build:
+    name: Windows MSI Package Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install cross-build dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends msitools gcc-mingw-w64-x86-64
+
+      - name: Build MSI package
+        run: |
+          chmod +x ci/build-msi.sh
+          ./ci/build-msi.sh
+
+      - name: Upload MSI artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: msi-packages
+          path: hello-1.0.0/msi/dist/*.msi
+          if-no-files-found: error
+
+  homebrew-build:
+    name: macOS & Homebrew Build
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Build and verify Homebrew formula
+        run: |
+          chmod +x ci/build-homebrew.sh
+          ./ci/build-homebrew.sh
+
+      - name: Upload Homebrew formula artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: homebrew-formula
+          path: hello-1.0.0/homebrew/dist/hello.rb
+          if-no-files-found: error
+
   release:
     name: GitHub Release
     if: startsWith(github.ref, 'refs/tags/')
-    needs: [ debian-build, rpm-build, flatpak-build, appimage-build ]
+    needs: [ debian-build, rpm-build, flatpak-build, appimage-build, msi-build, homebrew-build ]
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -156,4 +203,6 @@ jobs:
             release-artifacts/**/*.rpm
             release-artifacts/**/*.flatpak
             release-artifacts/**/*.AppImage
+            release-artifacts/**/*.msi
+            release-artifacts/**/*.rb
           generate_release_notes: true

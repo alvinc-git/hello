@@ -46,14 +46,17 @@ Careful when checking for warnings: a bare second `make` is a no-op and will rep
 ./hello --version     # Prints version
 ```
 
-## Packaging (Debian, RPM, Flatpak & AppImage)
+## Packaging (Debian, RPM, Flatpak, AppImage, Snap, MSI & Homebrew)
 
-Debian (`dpkg-buildpackage`), RPM (`rpmbuild`), Flatpak (`flatpak-builder`), and AppImage (`appimagetool`) frameworks package `hello` (C) and `hello-rust` (Rust) together.
+Multiple packaging frameworks package `hello` (C) and `hello-rust` (Rust) together:
 
 - **Debian packaging:** `hello-1.0.0/debian/` (build script: `./ci/build.sh`)
 - **RPM packaging:** `hello-1.0.0/rpm/` (build script: `./ci/build-rpm.sh`)
 - **Flatpak packaging:** `hello-1.0.0/flatpak/` (build script: `./ci/build-flatpak.sh`)
 - **AppImage packaging:** `hello-1.0.0/appimage/` (build script: `./ci/build-appimage.sh`)
+- **Snap packaging:** `hello-1.0.0/snap/` (build script: `./ci/build-snap.sh`)
+- **Windows MSI packaging:** `hello-1.0.0/msi/` (build script: `./ci/build-msi.sh`)
+- **macOS Homebrew formula:** `hello-1.0.0/homebrew/` (build script: `./ci/build-homebrew.sh`)
 
 ```bash
 # Debian manual packaging:

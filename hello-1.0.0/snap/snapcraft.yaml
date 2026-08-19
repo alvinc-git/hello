@@ -1,0 +1,30 @@
+name: hello
+version: '1.0.0'
+summary: Standard Hello program in C and Rust
+description: |
+  hello is the standard Hello program, featuring both a lightweight C99
+  implementation and a zero-dependency pure Rust implementation.
+
+grade: stable
+confinement: strict
+base: core24
+
+apps:
+  hello:
+    command: usr/bin/hello
+  hello-rust:
+    command: usr/bin/hello-rust
+
+parts:
+  hello:
+    plugin: autotools
+    source: ..
+    autotools-configure-parameters:
+      - --prefix=/usr
+    build-packages:
+      - gcc
+      - make
+      - autoconf
+      - automake
+      - cargo
+    stage-packages: []

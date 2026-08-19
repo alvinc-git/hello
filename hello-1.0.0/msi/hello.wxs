@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="*"
+           Name="Hello (Standard Hello Program)"
+           Language="1033"
+           Version="1.0.0.0"
+           Manufacturer="Alvin Cura"
+           UpgradeCode="4C6D8E9F-1234-5678-9ABC-DEF012345678">
+    
+    <Package InstallerVersion="200"
+             Compressed="yes"
+             InstallScope="perMachine"
+             Description="The standard Hello program in C and Rust"
+             Comments="Includes hello and hello-rust command-line executables" />
+
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    <MediaTemplate EmbedCab="yes" />
+
+    <Feature Id="MainFeature" Title="Hello Application" Level="1">
+      <ComponentGroupRef Id="ProductComponents" />
+    </Feature>
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFiles64Folder">
+        <Directory Id="INSTALLFOLDER" Name="Hello" />
+      </Directory>
+    </Directory>
+
+    <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+      <Component Id="CExecutable" Guid="5D7E9F0A-2345-6789-ABCD-EF0123456789" Win64="yes">
+        <File Id="HelloExe" Source="hello.exe" KeyPath="yes" />
+      </Component>
+
+      <Component Id="RustExecutable" Guid="6E8F0A1B-3456-789A-BCDE-F0123456789A" Win64="yes">
+        <File Id="HelloRustExe" Source="hello-rust.exe" KeyPath="yes" />
+      </Component>
+
+      <Component Id="PathEnvironment" Guid="7F9A1B2C-4567-89AB-CDEF-0123456789AB" Win64="yes">
+        <CreateFolder />
+        <Environment Id="PATH"
+                     Name="PATH"
+                     Value="[INSTALLFOLDER]"
+                     Permanent="no"
+                     Part="last"
+                     Action="set"
+                     System="yes" />
+      </Component>
+    </ComponentGroup>
+  </Product>
+</Wix>

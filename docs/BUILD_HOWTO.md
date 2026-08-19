@@ -139,6 +139,50 @@ chmod +x hello-1.0.0/appimage/dist/hello-1.0.0-*.AppImage
 
 ---
 
-## 8. Continuous Integration
+## 8. Snap Packaging (`.snap`)
 
-Automated builds and packaging tests run on GitHub Actions on every push and pull request via `.github/workflows/ci.yml`. Tagged releases (`1.0.0`, `v*`) automatically build and attach all packages (Debian `.deb`, RPM `.rpm`, Flatpak `.flatpak`, and AppImage `.AppImage`) to the corresponding GitHub Release.
+To build the Snap package:
+
+```bash
+./ci/build-snap.sh
+```
+
+Package artifacts land in `hello-1.0.0/snap/dist/`:
+- `hello-1.0.0/snap/dist/hello_1.0.0_<arch>.snap`
+
+---
+
+## 9. Windows MSI Packaging (`.msi`)
+
+To build the Windows Installer (`.msi`) package (via WiX Toolset on Windows or cross-compiled with `wixl` on Linux):
+
+```bash
+./ci/build-msi.sh
+```
+
+Package artifacts land in `hello-1.0.0/msi/dist/`:
+- `hello-1.0.0/msi/dist/hello-1.0.0-x64.msi`
+
+---
+
+## 10. macOS Homebrew Formula
+
+To verify and generate the Homebrew formula with release checksums:
+
+```bash
+./ci/build-homebrew.sh
+```
+
+Formula artifact lands in `hello-1.0.0/homebrew/dist/hello.rb`.
+
+To test locally:
+```bash
+brew install --build-from-source hello-1.0.0/homebrew/Formula/hello.rb
+brew test hello-1.0.0/homebrew/Formula/hello.rb
+```
+
+---
+
+## 11. Continuous Integration
+
+Automated builds and packaging tests run on GitHub Actions on every push and pull request via `.github/workflows/ci.yml`. Tagged releases (`1.0.0`, `v*`) automatically build and attach all packages (Debian `.deb`, RPM `.rpm`, Flatpak `.flatpak`, AppImage `.AppImage`, Windows `.msi`, and Homebrew formula `.rb`) to the corresponding GitHub Release.
